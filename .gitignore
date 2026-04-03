@@ -1,0 +1,25 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Editor
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Logs
+*.log
+
+# Dependency dirs
+node_modules/
+npm-debug.log*
+
+# Build output
+dist/
+build/
+
+# CLaude
+.claude/
