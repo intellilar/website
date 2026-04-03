@@ -375,6 +375,7 @@ h3 { font-size: 1.2rem; }
   border-left: 100px solid transparent;
   border-right: 100px solid transparent;
   border-bottom: 75px solid var(--accent);
+  z-index: 2;
   filter: drop-shadow(0 0 10px rgba(59,130,246,0.35));
 }
 
@@ -422,10 +423,53 @@ h3 { font-size: 1.2rem; }
 
 .house-chimney {
   position: absolute;
-  top: -44px; right: 30px;
-  width: 20px; height: 32px;
+  top: -8px;
+  right: 34px;
+  width: 20px;
+  height: 46px;
   background: var(--bg-alt);
   border: 2px solid rgba(59,130,246,0.25);
+  border-bottom: 0;
+  border-radius: 3px 3px 0 0;
+  z-index: 1;
+}
+
+.house-chimney::before,
+.house-chimney::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: -10px;
+  width: 10px;
+  height: 10px;
+  margin-left: -5px;
+  border-radius: 50%;
+  background: rgba(241,245,249,0.8);
+  filter: blur(0.5px);
+  animation: chimney-smoke 2.8s ease-out infinite;
+  pointer-events: none;
+}
+
+.house-chimney::after {
+  width: 8px;
+  height: 8px;
+  margin-left: -1px;
+  top: -4px;
+  animation-delay: 1.2s;
+}
+
+@keyframes chimney-smoke {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) scale(0.6);
+  }
+  15% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-10px, -38px) scale(1.9);
+  }
 }
 
 .connection-svg {
