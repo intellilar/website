@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="IntelliLar — Automação residencial profissional com Home Assistant, Alexa, Google Home, Apple Home e SmartThings. Transformamos sua casa em um lar inteligente." />
+  <meta name="theme-color" content="#0f172a" />
+  <title>IntelliLar — Automação Residencial Inteligente</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/style.css" />
+
+  <!--
+    GitHub Pages deployment:
+    1. Push the contents of this `website/` folder to a repository named
+       intellilar.github.io (org page) OR to the `gh-pages` branch of any repo.
+    2. In the repository settings → Pages → select the branch and root folder.
+    3. Your site will be live at https://intellilar.github.io (or your custom domain).
+    To use intellilar.com.br: add a CNAME file with "intellilar.com.br" and
+    configure your DNS with a CNAME record pointing to intellilar.github.io.
+  -->
+</head>
+<body>
+
+  <!-- ════════════════════════════════════════
+       NAVBAR
+  ════════════════════════════════════════ -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <div class="navbar-inner">
+        <a href="#" class="navbar-logo" aria-label="IntelliLar">
+          <img src="assets/logos/house_white.png" alt="" class="logo-icon" />
+          <img src="assets/logos/text_white.png" alt="IntelliLar" class="logo-text" />
+        </a>
+
+        <ul class="nav-links" role="list">
+          <li><a href="#servicos">Serviços</a></li>
+          <li><a href="#tecnologias">Tecnologias</a></li>
+          <li><a href="#servidores">Servidores</a></li>
+          <li><a href="#intellikeep">IntelliKeep</a></li>
+          <li><a href="#contato" class="btn btn-primary nav-cta">Fale Conosco</a></li>
+        </ul>
+
+        <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+
+      <!-- Mobile menu -->
+      <ul class="nav-mobile" id="nav-mobile" role="list">
+        <li><a href="#servicos">Serviços</a></li>
+        <li><a href="#tecnologias">Tecnologias</a></li>
+        <li><a href="#servidores">Servidores</a></li>
+        <li><a href="#intellikeep">IntelliKeep</a></li>
+        <li><a href="#contato">Fale Conosco</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ════════════════════════════════════════
+       HERO
+  ════════════════════════════════════════ -->
+  <section class="hero" id="inicio">
+    <div class="container">
+      <div class="hero-inner">
+
+        <!-- Text -->
+        <div class="hero-text">
+          <h1 class="hero-title">
+            Sua Casa Inteligente<br />
+            <span>Começa Aqui</span>
+          </h1>
+
+          <p class="hero-sub">
+            Transformamos sua residência em um lar totalmente conectado —
+            instalação, configuração e suporte completo com as principais
+            plataformas de automação do mercado.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#contato" class="btn btn-primary">
+              <!-- WhatsApp icon -->
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
+              </svg>
+              Fale pelo WhatsApp
+            </a>
+            <a href="#servicos" class="btn btn-outline">Ver nossos serviços</a>
+          </div>
+        </div>
+
+        <!-- Animated smart house -->
+        <div class="hero-visual">
+          <div class="smart-house-wrap">
+
+            <!-- SVG connection lines -->
+            <svg class="connection-svg" viewBox="0 0 420 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- top-left node to house -->
+              <line class="data-line" x1="82" y1="56" x2="175" y2="185"/>
+              <!-- top-right node to house -->
+              <line class="data-line" x1="338" y1="56" x2="245" y2="185" style="animation-delay:0.5s"/>
+              <!-- bottom-left node to house -->
+              <line class="data-line" x1="36" y1="290" x2="175" y2="255" style="animation-delay:1s"/>
+              <!-- bottom-right node to house -->
+              <line class="data-line" x1="384" y1="290" x2="245" y2="255" style="animation-delay:1.5s"/>
+            </svg>
+
+            <!-- House -->
+            <div class="house">
+              <div class="house-chimney"></div>
+              <div class="house-roof"></div>
+              <div class="house-wall">
+                <div class="house-window house-window--left">
+                  <div class="window-inner"></div>
+                </div>
+                <div class="house-window house-window--right">
+                  <div class="window-inner"></div>
+                </div>
+                <div class="house-door"></div>
+              </div>
+            </div>
+
+            <!-- Device nodes -->
+            <div class="device-node device-node--wifi" title="Wi-Fi / Roteador">
+              <div class="pulse-ring"></div>
+              <!-- Wi-Fi icon -->
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round">
+                <path d="M5 12.55a11 11 0 0 1 14.08 0"/>
+                <path d="M1.42 9a16 16 0 0 1 21.16 0"/>
+                <path d="M8.53 16.11a6 6 0 0 1 6.95 0"/>
+                <circle cx="12" cy="20" r="1" fill="#3b82f6"/>
+              </svg>
+              <span class="node-label">Wi-Fi</span>
+            </div>
+
+            <div class="device-node device-node--light" title="Iluminação inteligente">
+              <div class="pulse-ring"></div>
+              <!-- Bulb icon -->
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fbbf24" stroke-width="2" stroke-linecap="round">
+                <line x1="9" y1="18" x2="15" y2="18"/>
+                <line x1="10" y1="22" x2="14" y2="22"/>
+                <path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"/>
+              </svg>
+              <span class="node-label">Luz</span>
+            </div>
+
+            <div class="device-node device-node--thermo" title="Termostato / Clima">
+              <div class="pulse-ring"></div>
+              <!-- Thermometer icon -->
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round">
+                <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"/>
+              </svg>
+              <span class="node-label">Clima</span>
+            </div>
+
+            <div class="device-node device-node--lock" title="Fechadura inteligente">
+              <div class="pulse-ring"></div>
+              <!-- Lock icon -->
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="2" stroke-linecap="round">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+              </svg>
+              <span class="node-label">Fechadura</span>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       SERVIÇOS
+  ════════════════════════════════════════ -->
+  <section id="servicos">
+    <div class="container">
+      <div class="section-header" data-animate>
+        <span class="section-label">O que fazemos</span>
+        <h2 class="section-title">Soluções completas para<br />o seu lar inteligente</h2>
+        <p class="section-sub">Do planejamento à configuração final, cuidamos de cada detalhe para que sua automação funcione perfeitamente.</p>
+      </div>
+
+      <div class="services-grid">
+
+        <!-- 1. Planejamento -->
+        <div class="service-card" data-animate data-animate-delay="1">
+          <div class="service-visual sv-plan">
+            <div class="plan-dot"></div>
+            <div class="plan-dot"></div>
+            <div class="plan-dot"></div>
+            <div class="plan-dot"></div>
+            <div class="plan-dot"></div>
+            <div class="plan-dot"></div>
+            <div class="plan-dot"></div>
+            <div class="plan-dot"></div>
+            <div class="plan-dot"></div>
+          </div>
+          <h3>Planejamento</h3>
+          <p>Analisamos sua residência e projetamos a solução ideal — mapeando dispositivos, protocolos e integrações antes de qualquer instalação.</p>
+        </div>
+
+        <!-- 2. Instalação -->
+        <div class="service-card" data-animate data-animate-delay="2">
+          <div class="service-visual sv-install">
+            <div class="bulb-glow"></div>
+            <div class="bulb-head"></div>
+            <div class="bulb-base"></div>
+            <div class="bulb-contact"></div>
+          </div>
+          <h3>Instalação</h3>
+          <p>Instalamos dispositivos inteligentes de diversas marcas — lâmpadas, tomadas, câmeras, sensores e muito mais — garantindo integração perfeita ao seu ambiente.</p>
+        </div>
+
+        <!-- 3. Configuração -->
+        <div class="service-card" data-animate data-animate-delay="3">
+          <div class="service-visual sv-config">
+            <div class="gear-orbit"><div class="gear-orbit-dot"></div></div>
+            <div class="gear-wrap">
+              <div class="gear-body"></div>
+              <div class="gear-hub"></div>
+            </div>
+          </div>
+          <h3>Configuração</h3>
+          <p>Criamos automações personalizadas, cenas, rotinas e integrações entre plataformas diferentes — tudo pensado para o seu estilo de vida.</p>
+        </div>
+
+        <!-- 4. Suporte & Manutenção -->
+        <div class="service-card" data-animate data-animate-delay="4">
+          <div class="service-visual sv-support">
+            <div class="shield-ring"></div>
+            <div class="shield-ring shield-ring--2"></div>
+            <div class="shield-body"></div>
+          </div>
+          <h3>Suporte &amp; Manutenção</h3>
+          <p>Oferecemos suporte contínuo, atualizações e manutenção preventiva para garantir que sua automação funcione sempre da melhor forma.</p>
+        </div>
+
+        <!-- 5. Customização -->
+        <div class="service-card" data-animate data-animate-delay="5">
+          <div class="service-visual sv-custom">
+            <div class="eq-bar" style="--delay:0.0s;--max-h:42px"></div>
+            <div class="eq-bar" style="--delay:0.3s;--max-h:64px"></div>
+            <div class="eq-bar" style="--delay:0.6s;--max-h:52px"></div>
+            <div class="eq-bar" style="--delay:0.1s;--max-h:70px"></div>
+            <div class="eq-bar" style="--delay:0.4s;--max-h:36px"></div>
+          </div>
+          <h3>Customização</h3>
+          <p>Expandimos e refinamos ambientes já automatizados — adicionando novos dispositivos, ajustando rotinas e otimizando a experiência do usuário.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       TECNOLOGIAS
+  ════════════════════════════════════════ -->
+  <section id="tecnologias">
+    <div class="container">
+      <div class="section-header" data-animate style="text-align:center">
+        <span class="section-label">Compatibilidade</span>
+        <h2 class="section-title">Trabalhamos com as melhores plataformas</h2>
+        <p class="section-sub" style="margin:0 auto">Integração com os principais ecossistemas e protocolos de automação do mercado.</p>
+      </div>
+    </div>
+
+    <!-- Marquee row 1: Plataformas → esquerda -->
+    <div class="marquee-group" data-animate>
+      <p class="marquee-label">Plataformas</p>
+      <div class="marquee-track-wrap">
+        <div class="marquee-track marquee-track--left">
+          <!-- duplicado para loop contínuo -->
+          <div class="marquee-item tech-badge--ha">
+            <img src="assets/icons/homeassistant.svg" alt="Home Assistant" loading="eager" />
+            <span>Home Assistant</span>
+          </div>
+          <div class="marquee-item tech-badge--alexa">
+            <img src="assets/icons/amazonalexa.webp" alt="Amazon Alexa" loading="eager" />
+            <span>Amazon Alexa</span>
+          </div>
+          <div class="marquee-item tech-badge--google">
+            <img src="assets/icons/googlehome.svg" alt="Google Home" loading="eager" />
+            <span>Google Home</span>
+          </div>
+          <div class="marquee-item tech-badge--apple">
+            <img src="assets/icons/apple.png" alt="Apple Home" loading="eager" />
+            <span>Apple Home</span>
+          </div>
+          <div class="marquee-item tech-badge--st">
+            <img src="assets/icons/smartthings.svg" alt="SmartThings" loading="eager" />
+            <span>SmartThings</span>
+          </div>
+          <div class="marquee-item tech-badge--homebridge">
+            <img src="assets/icons/homebridge.png" alt="Homebridge" loading="eager" />
+            <span>Homebridge</span>
+          </div>
+          <!-- cópia para loop contínuo -->
+          <div class="marquee-item tech-badge--ha" aria-hidden="true">
+            <img src="assets/icons/homeassistant.svg" alt="" loading="eager" />
+            <span>Home Assistant</span>
+          </div>
+          <div class="marquee-item tech-badge--alexa" aria-hidden="true">
+            <img src="assets/icons/amazonalexa.webp" alt="" loading="eager" />
+            <span>Amazon Alexa</span>
+          </div>
+          <div class="marquee-item tech-badge--google" aria-hidden="true">
+            <img src="assets/icons/googlehome.svg" alt="" loading="eager" />
+            <span>Google Home</span>
+          </div>
+          <div class="marquee-item tech-badge--apple" aria-hidden="true">
+            <img src="assets/icons/apple.png" alt="" loading="eager" />
+            <span>Apple Home</span>
+          </div>
+          <div class="marquee-item tech-badge--st" aria-hidden="true">
+            <img src="assets/icons/smartthings.svg" alt="" loading="eager" />
+            <span>SmartThings</span>
+          </div>
+          <div class="marquee-item tech-badge--homebridge" aria-hidden="true">
+            <img src="assets/icons/homebridge.png" alt="" loading="eager" />
+            <span>Homebridge</span>
+          </div>
+          <div class="marquee-item tech-badge--ha" aria-hidden="true">
+            <img src="assets/icons/homeassistant.svg" alt="" loading="eager" />
+            <span>Home Assistant</span>
+          </div>
+          <div class="marquee-item tech-badge--alexa" aria-hidden="true">
+            <img src="assets/icons/amazonalexa.webp" alt="" loading="eager" />
+            <span>Amazon Alexa</span>
+          </div>
+          <div class="marquee-item tech-badge--google" aria-hidden="true">
+            <img src="assets/icons/googlehome.svg" alt="" loading="eager" />
+            <span>Google Home</span>
+          </div>
+          <div class="marquee-item tech-badge--apple" aria-hidden="true">
+            <img src="assets/icons/apple.png" alt="" loading="eager" />
+            <span>Apple Home</span>
+          </div>
+          <div class="marquee-item tech-badge--st" aria-hidden="true">
+            <img src="assets/icons/smartthings.svg" alt="" loading="eager" />
+            <span>SmartThings</span>
+          </div>
+          <div class="marquee-item tech-badge--homebridge" aria-hidden="true">
+            <img src="assets/icons/homebridge.png" alt="" loading="eager" />
+            <span>Homebridge</span>
+          </div>
+          <div class="marquee-item tech-badge--ha" aria-hidden="true">
+            <img src="assets/icons/homeassistant.svg" alt="" loading="eager" />
+            <span>Home Assistant</span>
+          </div>
+          <div class="marquee-item tech-badge--alexa" aria-hidden="true">
+            <img src="assets/icons/amazonalexa.webp" alt="" loading="eager" />
+            <span>Amazon Alexa</span>
+          </div>
+          <div class="marquee-item tech-badge--google" aria-hidden="true">
+            <img src="assets/icons/googlehome.svg" alt="" loading="eager" />
+            <span>Google Home</span>
+          </div>
+          <div class="marquee-item tech-badge--apple" aria-hidden="true">
+            <img src="assets/icons/apple.png" alt="" loading="eager" />
+            <span>Apple Home</span>
+          </div>
+          <div class="marquee-item tech-badge--st" aria-hidden="true">
+            <img src="assets/icons/smartthings.svg" alt="" loading="eager" />
+            <span>SmartThings</span>
+          </div>
+          <div class="marquee-item tech-badge--homebridge" aria-hidden="true">
+            <img src="assets/icons/homebridge.png" alt="" loading="eager" />
+            <span>Homebridge</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Marquee row 2: Protocolos → direita -->
+    <div class="marquee-group" data-animate data-animate-delay="2">
+      <p class="marquee-label">Protocolos &amp; Dispositivos</p>
+      <div class="marquee-track-wrap">
+        <div class="marquee-track marquee-track--right">
+          <div class="marquee-item tech-badge--zigbee">
+            <img src="assets/icons/zigbee.svg" alt="Zigbee" loading="eager" />
+            <span>Zigbee</span>
+          </div>
+          <div class="marquee-item tech-badge--tuya">
+            <img src="assets/icons/tuya.png" alt="Tuya" loading="eager" />
+            <span>Tuya</span>
+          </div>
+          <div class="marquee-item tech-badge--zwave">
+            <img src="assets/icons/zwave.svg" alt="Z-Wave" loading="eager" />
+            <span>Z-Wave</span>
+          </div>
+          <div class="marquee-item tech-badge--mqtt">
+            <img src="assets/icons/mqtt.svg" alt="MQTT" loading="eager" />
+            <span>MQTT</span>
+          </div>
+          <div class="marquee-item tech-badge--matter">
+            <img src="assets/icons/matter.png" alt="Matter" loading="eager" />
+            <span>Matter</span>
+          </div>
+          <div class="marquee-item tech-badge--bluetooth">
+            <img src="assets/icons/bluetooth.svg" alt="Bluetooth" loading="eager" />
+            <span>Bluetooth</span>
+          </div>
+          <div class="marquee-item tech-badge--wifi">
+            <img src="assets/icons/wifi.svg" alt="Wi-Fi" loading="eager" />
+            <span>Wi-Fi</span>
+          </div>
+          <!-- cópia para loop contínuo -->
+          <div class="marquee-item tech-badge--zigbee" aria-hidden="true">
+            <img src="assets/icons/zigbee.svg" alt="" loading="eager" />
+            <span>Zigbee</span>
+          </div>
+          <div class="marquee-item tech-badge--tuya" aria-hidden="true">
+            <img src="assets/icons/tuya.png" alt="" loading="eager" />
+            <span>Tuya</span>
+          </div>
+          <div class="marquee-item tech-badge--zwave" aria-hidden="true">
+            <img src="assets/icons/zwave.svg" alt="" loading="eager" />
+            <span>Z-Wave</span>
+          </div>
+          <div class="marquee-item tech-badge--mqtt" aria-hidden="true">
+            <img src="assets/icons/mqtt.svg" alt="" loading="eager" />
+            <span>MQTT</span>
+          </div>
+          <div class="marquee-item tech-badge--matter" aria-hidden="true">
+            <img src="assets/icons/matter.png" alt="Matter" loading="eager" />
+            <span>Matter</span>
+          </div>
+          <div class="marquee-item tech-badge--bluetooth" aria-hidden="true">
+            <img src="assets/icons/bluetooth.svg" alt="Bluetooth" loading="eager" />
+            <span>Bluetooth</span>
+          </div>
+          <div class="marquee-item tech-badge--wifi" aria-hidden="true">
+            <img src="assets/icons/wifi.svg" alt="Wi-Fi" loading="eager" />
+            <span>Wi-Fi</span>
+          </div>
+          <div class="marquee-item tech-badge--zigbee" aria-hidden="true">
+            <img src="assets/icons/zigbee.svg" alt="" loading="eager" />
+            <span>Zigbee</span>
+          </div>
+          <div class="marquee-item tech-badge--tuya" aria-hidden="true">
+            <img src="assets/icons/tuya.png" alt="" loading="eager" />
+            <span>Tuya</span>
+          </div>
+          <div class="marquee-item tech-badge--zwave" aria-hidden="true">
+            <img src="assets/icons/zwave.svg" alt="" loading="eager" />
+            <span>Z-Wave</span>
+          </div>
+          <div class="marquee-item tech-badge--mqtt" aria-hidden="true">
+            <img src="assets/icons/mqtt.svg" alt="" loading="eager" />
+            <span>MQTT</span>
+          </div>
+          <div class="marquee-item tech-badge--matter" aria-hidden="true">
+            <img src="assets/icons/matter.png" alt="Matter" loading="eager" />
+            <span>Matter</span>
+          </div>
+          <div class="marquee-item tech-badge--bluetooth" aria-hidden="true">
+            <img src="assets/icons/bluetooth.svg" alt="Bluetooth" loading="eager" />
+            <span>Bluetooth</span>
+          </div>
+          <div class="marquee-item tech-badge--wifi" aria-hidden="true">
+            <img src="assets/icons/wifi.svg" alt="Wi-Fi" loading="eager" />
+            <span>Wi-Fi</span>
+          </div>
+          <div class="marquee-item tech-badge--zigbee" aria-hidden="true">
+            <img src="assets/icons/zigbee.svg" alt="" loading="eager" />
+            <span>Zigbee</span>
+          </div>
+          <div class="marquee-item tech-badge--tuya" aria-hidden="true">
+            <img src="assets/icons/tuya.png" alt="" loading="eager" />
+            <span>Tuya</span>
+          </div>
+          <div class="marquee-item tech-badge--zwave" aria-hidden="true">
+            <img src="assets/icons/zwave.svg" alt="" loading="eager" />
+            <span>Z-Wave</span>
+          </div>
+          <div class="marquee-item tech-badge--mqtt" aria-hidden="true">
+            <img src="assets/icons/mqtt.svg" alt="" loading="eager" />
+            <span>MQTT</span>
+          </div>
+          <div class="marquee-item tech-badge--matter" aria-hidden="true">
+            <img src="assets/icons/matter.png" alt="Matter" loading="eager" />
+            <span>Matter</span>
+          </div>
+          <div class="marquee-item tech-badge--bluetooth" aria-hidden="true">
+            <img src="assets/icons/bluetooth.svg" alt="Bluetooth" loading="eager" />
+            <span>Bluetooth</span>
+          </div>
+          <div class="marquee-item tech-badge--wifi" aria-hidden="true">
+            <img src="assets/icons/wifi.svg" alt="Wi-Fi" loading="eager" />
+            <span>Wi-Fi</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       SERVIDORES
+  ════════════════════════════════════════ -->
+  <section id="servidores">
+    <div class="container">
+      <div class="section-header" data-animate style="text-align:center">
+        <span class="section-label">Infraestrutura</span>
+        <h2 class="section-title">Do simples ao robusto,<br/>a solução certa para você</h2>
+        <p class="section-sub" style="margin:0 auto">Cada lar tem suas necessidades. Montamos desde setups 100% na nuvem — sem nenhum servidor local — até soluções locais de alta performance para automações avançadas.</p>
+      </div>
+
+      <!-- Spectrum bar -->
+      <div class="infra-spectrum" data-animate>
+        <div class="spectrum-track">
+          <div class="spectrum-label spectrum-label--left">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>
+            Nuvem
+          </div>
+          <div class="spectrum-bar">
+            <div class="spectrum-fill"></div>
+          </div>
+          <div class="spectrum-label spectrum-label--right">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+            Local
+          </div>
+        </div>
+      </div>
+
+      <!-- Nuvem -->
+      <div class="infra-group" data-animate>
+        <div class="infra-group-header">
+          <span class="infra-tag infra-tag--cloud">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>
+            Setups na Nuvem
+          </span>
+          <p class="infra-group-desc">Sem servidor local. Funciona via internet com os ecossistemas das grandes plataformas — ideal para quem quer começar de forma simples.</p>
+        </div>
+        <div class="cloud-examples">
+          <div class="cloud-example">
+            <img src="assets/icons/amazonalexa.webp" alt="Amazon Alexa" />
+            <div>
+              <strong>Amazon Alexa + Echo</strong>
+              <span>Controle por voz, rotinas e dispositivos Zigbee via Echo Hub</span>
+            </div>
+          </div>
+          <div class="cloud-example">
+            <img src="assets/icons/googlehome.svg" alt="Google Home" />
+            <div>
+              <strong>Google Home</strong>
+              <span>Automações, presença e integração com dispositivos Matter e Wi-Fi</span>
+            </div>
+          </div>
+          <div class="cloud-example">
+            <img src="assets/icons/apple.png" alt="Apple Home" />
+            <div>
+              <strong>Apple Home + HomePod</strong>
+              <span>Privacidade e integração nativa com iPhone, iPad e Apple Watch</span>
+            </div>
+          </div>
+          <div class="cloud-example">
+            <img src="assets/icons/smartthings.svg" alt="SmartThings" />
+            <div>
+              <strong>SmartThings</strong>
+              <span>Plataforma Samsung com suporte a Zigbee, Z-Wave e Matter</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Divisor -->
+      <div class="infra-divider" data-animate>
+        <span>ou com servidor local para mais controle</span>
+      </div>
+
+      <!-- Local -->
+      <div class="infra-group" data-animate>
+        <div class="infra-group-header infra-group-header--right">
+          <span class="infra-tag infra-tag--local">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+            Servidores Locais
+          </span>
+          <p class="infra-group-desc">Total controle, privacidade e independência da internet. Funciona mesmo sem conexão e suporta automações complexas de alto desempenho.</p>
+        </div>
+        <div class="servers-grid">
+
+          <div class="server-card" data-animate data-animate-delay="1">
+            <div class="server-visual sv-rpi">
+              <div class="rpi-board">
+                <div class="rpi-chip"></div>
+                <div class="rpi-port rpi-port--usb"></div>
+                <div class="rpi-port rpi-port--eth"></div>
+                <div class="rpi-led rpi-led--pwr"></div>
+                <div class="rpi-led rpi-led--act"></div>
+              </div>
+            </div>
+            <h3>Raspberry Pi</h3>
+            <p>Solução compacta e silenciosa, ideal para começar. Baixo consumo energético e custo acessível, perfeito para automações residenciais de pequeno e médio porte.</p>
+            <ul class="server-specs">
+              <li><span class="spec-dot"></span>Consumo ~5W</li>
+              <li><span class="spec-dot"></span>Silencioso</li>
+              <li><span class="spec-dot"></span>Custo acessível</li>
+            </ul>
+          </div>
+
+          <div class="server-card" data-animate data-animate-delay="2">
+            <div class="server-visual sv-nuc">
+              <div class="nuc-box">
+                <div class="nuc-led"></div>
+                <div class="nuc-vent">
+                  <span></span><span></span><span></span><span></span>
+                </div>
+              </div>
+            </div>
+            <h3>Mini PC / NUC</h3>
+            <p>Mais potência em formato compacto. Suporta múltiplas integrações simultâneas, VMs e cargas pesadas — ideal para lares com automação avançada.</p>
+            <ul class="server-specs">
+              <li><span class="spec-dot"></span>Alta performance</li>
+              <li><span class="spec-dot"></span>Multitarefa</li>
+              <li><span class="spec-dot"></span>Expansível</li>
+            </ul>
+          </div>
+
+          <div class="server-card" data-animate data-animate-delay="3">
+            <div class="server-visual sv-nas">
+              <div class="nas-box">
+                <div class="nas-drive"></div>
+                <div class="nas-drive"></div>
+                <div class="nas-drive"></div>
+                <div class="nas-led"></div>
+              </div>
+            </div>
+            <h3>NAS Server</h3>
+            <p>Combina automação residencial com armazenamento e backup centralizado. Perfeito para quem já utiliza ou quer um servidor doméstico completo.</p>
+            <ul class="server-specs">
+              <li><span class="spec-dot"></span>Armazenamento</li>
+              <li><span class="spec-dot"></span>Backup automático</li>
+              <li><span class="spec-dot"></span>Alta disponibilidade</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ════════════════════════════════════════
+       INTELLIKEEP
+  ════════════════════════════════════════ -->
+  <section id="intellikeep">
+    <div class="container">
+
+      <!-- Logo centralizada no topo -->
+      <div class="intellikeep-logo-wrap" data-animate>
+        <img src="assets/logos/intellikeep_transp_logo.png" alt="IntelliKeep" />
+      </div>
+
+      <!-- Conteúdo em grid abaixo -->
+      <div class="intellikeep-inner">
+
+        <div class="intellikeep-left" data-animate>
+          <span class="section-label">Produto open-source</span>
+          <h2 class="section-title" style="margin-bottom:16px">Manutenção Residencial<br />Inteligente</h2>
+          <p>
+            Desenvolvido pela IntelliLar, o <strong>IntelliKeep</strong> é uma integração
+            gratuita e open-source para o Home Assistant que centraliza todas
+            as tarefas de manutenção da sua casa — de troca de filtros a revisões
+            periódicas — com alertas automáticos e histórico completo.
+          </p>
+          <p style="margin-top: 12px;">
+            Disponível via HACS (Home Assistant Community Store), com suporte
+            completo em português (pt-BR) e inglês.
+          </p>
+          <a href="https://github.com/intellilar/intellikeep" target="_blank" rel="noopener noreferrer" class="btn btn-github" style="margin-top:24px">
+            <!-- GitHub icon -->
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+            </svg>
+            Ver no GitHub
+          </a>
+        </div>
+
+        <div class="feature-list" data-animate data-animate-delay="2">
+          <div class="feature-item">
+            <div class="feature-check">
+              <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <span>Tarefas únicas e recorrentes com níveis de prioridade</span>
+          </div>
+          <div class="feature-item">
+            <div class="feature-check">
+              <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <span>Alertas e notificações automáticas antes do vencimento</span>
+          </div>
+          <div class="feature-item">
+            <div class="feature-check">
+              <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <span>Histórico completo de manutenções realizadas</span>
+          </div>
+          <div class="feature-item">
+            <div class="feature-check">
+              <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <span>Vinculação a entidades do Home Assistant</span>
+          </div>
+          <div class="feature-item">
+            <div class="feature-check">
+              <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <span>Painel e card Lovelace com design responsivo</span>
+          </div>
+          <div class="feature-item">
+            <div class="feature-check">
+              <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <span>Interface em português (pt-BR) e inglês</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       CONTATO
+  ════════════════════════════════════════ -->
+  <section id="contato">
+    <div class="container">
+      <div class="section-header" data-animate>
+        <span class="section-label">Entre em contato</span>
+        <h2 class="section-title">Vamos transformar sua casa?</h2>
+        <p class="section-sub">Fale com a gente pelo canal que preferir. Respondemos rápido!</p>
+      </div>
+
+      <div class="contato-inner">
+
+        <div class="contato-left" data-animate>
+          <h3>Atendimento direto</h3>
+          <p>Prefira falar com alguém da nossa equipe de forma rápida? Entre em contato pelo WhatsApp ou e-mail.</p>
+
+          <div class="contato-options">
+            <!--
+              Substitua XXXXXXXXXXX pelo número de telefone no formato:
+              55 + DDD + número (sem espaços, traços ou parênteses)
+              Exemplo: 5511999999999
+            -->
+            <a href="https://wa.me/55XXXXXXXXXXX?text=Olá%2C%20gostaria%20de%20mais%20informações%20sobre%20automação%20residencial%20com%20a%20IntelliLar."
+               target="_blank" rel="noopener noreferrer"
+               class="btn btn-whatsapp">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
+              </svg>
+              Falar pelo WhatsApp
+            </a>
+
+            <!-- Substitua pelo e-mail real da empresa -->
+            <a href="mailto:contato@intellilar.com.br" class="btn btn-email">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                <polyline points="22,6 12,13 2,6"/>
+              </svg>
+              contato@intellilar.com.br
+            </a>
+          </div>
+        </div>
+
+        <!--
+          Formulário de contato via Formspree (gratuito, sem backend):
+          1. Crie uma conta em https://formspree.io
+          2. Crie um novo formulário e copie o ID do endpoint
+          3. Substitua action="#" por action="https://formspree.io/f/SEU_ID"
+        -->
+        <form class="contact-form" action="#" method="POST" data-animate data-animate-delay="2" id="contact-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="nome">Nome</label>
+              <input type="text" id="nome" name="nome" placeholder="Seu nome" required />
+            </div>
+            <div class="form-group">
+              <label for="email">E-mail</label>
+              <input type="email" id="email" name="email" placeholder="seu@email.com" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="assunto">Assunto</label>
+            <input type="text" id="assunto" name="assunto" placeholder="Como podemos ajudar?" />
+          </div>
+          <div class="form-group">
+            <label for="mensagem">Mensagem</label>
+            <textarea id="mensagem" name="mensagem" rows="5" placeholder="Descreva o que você precisa..." required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary form-submit">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="22" y1="2" x2="11" y2="13"/>
+              <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+            </svg>
+            Enviar mensagem
+          </button>
+        </form>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       FOOTER
+  ════════════════════════════════════════ -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <a href="#inicio" class="footer-logo" aria-label="IntelliLar">
+          <img src="assets/logos/house_white.png" alt="" class="logo-icon" />
+          <img src="assets/logos/text_white.png" alt="IntelliLar" class="logo-text" />
+        </a>
+
+        <p class="footer-copy">
+          &copy; <span id="year"></span> IntelliLar. Todos os direitos reservados.
+        </p>
+
+        <nav class="footer-links" aria-label="Links do rodapé">
+          <a href="#servicos">Serviços</a>
+          <a href="#tecnologias">Tecnologias</a>
+          <a href="https://github.com/intellilar" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href="#contato">Contato</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/main.js"></script>
+</body>
+</html>
