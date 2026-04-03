@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Intellilar Automation Scene</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0f172a;
+      --surface: #1e293b;
+      --surface-alt: #1a2744;
+      --accent: #3b82f6;
+      --accent-warm: #f59e0b;
+      --accent-cool: #60a5fa;
+      --text: #f1f5f9;
+      --muted: #94a3b8;
+      --ok: #10b981;
+      --warn: #f97316;
+      --danger: #ef4444;
+      --night-light: #ffd77a;
+      --transition: 520ms cubic-bezier(0.2, 0.72, 0.2, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: "Inter", system-ui, sans-serif;
+      background:
+        radial-gradient(700px 450px at 15% 10%, rgba(59, 130, 246, 0.15), transparent 70%),
+        radial-gradient(900px 500px at 85% -10%, rgba(59, 130, 246, 0.08), transparent 70%),
+        var(--bg);
+      color: var(--text);
+      display: grid;
+      place-items: center;
+      padding: 20px;
+    }
+
+    .demo {
+      width: min(1100px, 100%);
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: linear-gradient(180deg, rgba(30, 41, 59, 0.78), rgba(15, 23, 42, 0.9));
+      box-shadow: 0 18px 60px rgba(0, 0, 0, 0.45);
+      overflow: hidden;
+    }
+
+    .demo-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 18px 22px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(15, 23, 42, 0.72);
+    }
+
+    .title h1 {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      font-weight: 600;
+      letter-spacing: 0.01em;
+    }
+
+    .title p {
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 0.86rem;
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .mode-btn {
+      width: 54px;
+      height: 54px;
+      border-radius: 14px;
+      border: 1px solid rgba(59, 130, 246, 0.28);
+      background: rgba(30, 41, 59, 0.9);
+      color: var(--text);
+      position: relative;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease, background 220ms ease;
+    }
+
+    .mode-btn:hover,
+    .mode-btn:focus-visible {
+      outline: none;
+      transform: translateY(-2px);
+      border-color: var(--accent-cool);
+      box-shadow: 0 8px 22px rgba(59, 130, 246, 0.28);
+    }
+
+    .mode-btn.active {
+      border-color: var(--accent-cool);
+      background: rgba(59, 130, 246, 0.2);
+      box-shadow: 0 0 0 2px rgba(96, 165, 250, 0.26), 0 8px 24px rgba(59, 130, 246, 0.35);
+    }
+
+    .mode-btn .label {
+      position: absolute;
+      bottom: -20px;
+      font-size: 0.65rem;
+      color: var(--muted);
+      opacity: 0;
+      transition: opacity 220ms ease;
+    }
+
+    .mode-btn:hover .label,
+    .mode-btn.active .label,
+    .mode-btn:focus-visible .label {
+      opacity: 1;
+    }
+
+    .scene {
+      position: relative;
+      min-height: 550px;
+      overflow: hidden;
+      background:
+        linear-gradient(to bottom, #15233f 0%, #101a31 48%, #0b1325 100%);
+      transition: background var(--transition);
+    }
+
+    .scene[data-mode="sun"] {
+      background:
+        linear-gradient(to bottom, #1b2f54 0%, #152648 48%, #101d38 100%);
+    }
+
+    .scene[data-mode="rain"] {
+      background:
+        linear-gradient(to bottom, #2a3b58 0%, #20324f 48%, #18263f 100%);
+    }
+
+    .scene[data-mode="moon"],
+    .scene[data-mode="lock"] {
+      background:
+        linear-gradient(to bottom, #101a30 0%, #0b1426 48%, #090f1d 100%);
+    }
+
+    .scene::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 75% 6%, rgba(96, 165, 250, 0.16) 0%, transparent 35%),
+        radial-gradient(circle at 20% 0%, rgba(59, 130, 246, 0.1) 0%, transparent 40%);
+      pointer-events: none;
+    }
+
+    .status {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      z-index: 6;
+      font-size: 0.78rem;
+      color: #dbeafe;
+      border: 1px solid rgba(96, 165, 250, 0.3);
+      background: rgba(15, 23, 42, 0.7);
+      border-radius: 999px;
+      padding: 7px 12px;
+      backdrop-filter: blur(8px);
+    }
+
+    .weather {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .sun,
+    .moon {
+      position: absolute;
+      top: 58px;
+      right: 84px;
+      width: 88px;
+      height: 88px;
+      border-radius: 50%;
+      transition: opacity var(--transition), transform var(--transition);
+    }
+
+    .sun {
+      background: radial-gradient(circle at 35% 35%, #fff5b5, #fbbf24 70%);
+      box-shadow: 0 0 45px rgba(251, 191, 36, 0.45);
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    .moon {
+      background: radial-gradient(circle at 35% 35%, #f8fbff, #dbeafe 70%);
+      box-shadow: 0 0 35px rgba(219, 234, 254, 0.35);
+      opacity: 0;
+      transform: translateY(8px) scale(0.9);
+    }
+
+    .cloud {
+      position: absolute;
+      width: 140px;
+      height: 48px;
+      background: rgba(226, 232, 240, 0.78);
+      border-radius: 999px;
+      filter: drop-shadow(0 8px 14px rgba(15, 23, 42, 0.3));
+      transition: opacity var(--transition), transform var(--transition);
+      opacity: 0.42;
+    }
+
+    .cloud::before,
+    .cloud::after {
+      content: "";
+      position: absolute;
+      background: inherit;
+      border-radius: 999px;
+    }
+
+    .cloud::before {
+      width: 72px;
+      height: 52px;
+      left: 18px;
+      top: -22px;
+    }
+
+    .cloud::after {
+      width: 64px;
+      height: 44px;
+      right: 16px;
+      top: -16px;
+    }
+
+    .cloud.one {
+      top: 92px;
+      left: 72px;
+    }
+
+    .cloud.two {
+      top: 132px;
+      left: 210px;
+      transform: scale(0.8);
+      opacity: 0.28;
+    }
+
+    .rain-layer {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity var(--transition);
+      background-image:
+        repeating-linear-gradient(100deg, transparent 0 17px, rgba(125, 211, 252, 0.75) 17px 19px, transparent 19px 34px);
+      animation: rain-fall 620ms linear infinite;
+    }
+
+    @keyframes rain-fall {
+      from {
+        transform: translateY(-18px);
+      }
+      to {
+        transform: translateY(18px);
+      }
+    }
+
+    .smart-house-wrap {
+      position: absolute;
+      width: 420px;
+      height: 420px;
+      top: 52%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 4;
+    }
+
+    .smart-house-wrap::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.2) 0%, transparent 72%);
+      animation: ambient-glow 4s ease-in-out infinite;
+    }
+
+    @keyframes ambient-glow {
+      0%,
+      100% {
+        opacity: 0.5;
+        transform: translate(-50%, -50%) scale(1);
+      }
+      50% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.14);
+      }
+    }
+
+    .connection-svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .data-line {
+      stroke: var(--accent);
+      stroke-width: 1.5;
+      opacity: 0.4;
+      fill: none;
+      stroke-dasharray: 7 5;
+      animation: dash-flow 2s linear infinite;
+    }
+
+    @keyframes dash-flow {
+      to {
+        stroke-dashoffset: -24;
+      }
+    }
+
+    .house {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 180px;
+      height: 170px;
+      z-index: 3;
+    }
+
+    .house-roof {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 100px solid transparent;
+      border-right: 100px solid transparent;
+      border-bottom: 75px solid var(--accent);
+      filter: drop-shadow(0 0 10px rgba(59, 130, 246, 0.35));
+    }
+
+    .house-wall {
+      position: absolute;
+      bottom: 0;
+      left: 10px;
+      right: 10px;
+      height: 110px;
+      background: var(--surface-alt);
+      border: 2px solid rgba(59, 130, 246, 0.3);
+      border-radius: 3px 3px 5px 5px;
+      transition: filter var(--transition);
+    }
+
+    .house-window {
+      position: absolute;
+      top: 16px;
+      width: 32px;
+      height: 28px;
+      border-radius: 3px;
+      border: 2px solid var(--accent);
+      overflow: hidden;
+      background: #173764;
+      transition: background var(--transition), box-shadow var(--transition);
+    }
+
+    .house-window.left {
+      left: 16px;
+    }
+
+    .house-window.right {
+      right: 16px;
+    }
+
+    .window-shutter {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, #4b6a93, #2a456a);
+      transform: translateY(-110%);
+      transition: transform var(--transition);
+    }
+
+    .house-door {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 28px;
+      height: 42px;
+      background: #1e3a5f;
+      border: 2px solid var(--accent);
+      border-radius: 4px 4px 0 0;
+    }
+
+    .house-chimney {
+      position: absolute;
+      top: -44px;
+      right: 30px;
+      width: 20px;
+      height: 32px;
+      background: var(--surface-alt);
+      border: 2px solid rgba(59, 130, 246, 0.28);
+    }
+
+    .device-node {
+      position: absolute;
+      width: 54px;
+      height: 54px;
+      border-radius: 12px;
+      background: #1e293b;
+      border: 1.5px solid rgba(59, 130, 246, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 14px rgba(0, 0, 0, 0.25);
+      animation: float 4s ease-in-out infinite;
+      color: var(--muted);
+    }
+
+    @keyframes float {
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-8px);
+      }
+    }
+
+    .device-node.sun {
+      top: 28px;
+      left: 28px;
+      animation-delay: 0s;
+    }
+
+    .device-node.rain {
+      top: 28px;
+      right: 28px;
+      animation-delay: 0.7s;
+    }
+
+    .device-node.moon {
+      bottom: 70px;
+      left: 12px;
+      animation-delay: 1.4s;
+    }
+
+    .device-node.lock {
+      bottom: 70px;
+      right: 12px;
+      animation-delay: 2.1s;
+    }
+
+    .pulse-ring {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 54px;
+      height: 54px;
+      transform: translate(-50%, -50%);
+      border: 1.5px solid var(--accent);
+      border-radius: 12px;
+      animation: pulse-expand 2.5s ease-out infinite;
+    }
+
+    .device-node.rain .pulse-ring {
+      animation-delay: 0.5s;
+    }
+
+    .device-node.moon .pulse-ring {
+      animation-delay: 1s;
+    }
+
+    .device-node.lock .pulse-ring {
+      animation-delay: 1.5s;
+    }
+
+    @keyframes pulse-expand {
+      from {
+        opacity: 0.6;
+        transform: translate(-50%, -50%) scale(1);
+      }
+      to {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(2);
+      }
+    }
+
+    .node-label {
+      position: absolute;
+      bottom: -24px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.65rem;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .ground {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 34%;
+      background: linear-gradient(180deg, rgba(16, 185, 129, 0.18), rgba(16, 185, 129, 0.32));
+      border-top: 1px solid rgba(16, 185, 129, 0.24);
+      transition: filter var(--transition);
+    }
+
+    .garden-lights {
+      position: absolute;
+      left: 50%;
+      bottom: 104px;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 42px;
+      z-index: 2;
+    }
+
+    .g-light {
+      width: 14px;
+      height: 14px;
+      border-radius: 999px;
+      background: #91a7c9;
+      box-shadow: 0 0 0 0 rgba(255, 215, 122, 0);
+      transition: background var(--transition), box-shadow var(--transition), transform var(--transition);
+    }
+
+    .sprinklers {
+      position: absolute;
+      left: 50%;
+      bottom: 116px;
+      transform: translateX(-50%);
+      width: 250px;
+      height: 90px;
+      opacity: 0;
+      transition: opacity 260ms ease;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .spray {
+      position: absolute;
+      bottom: 0;
+      width: 120px;
+      height: 74px;
+      border-top: 2px dashed rgba(125, 211, 252, 0.85);
+      border-radius: 100% 100% 0 0;
+      animation: spray-pulse 680ms ease-in-out infinite;
+    }
+
+    .spray.left {
+      left: 0;
+      transform: rotate(-2deg);
+    }
+
+    .spray.right {
+      right: 0;
+      transform: scaleX(-1) rotate(-2deg);
+    }
+
+    @keyframes spray-pulse {
+      0%,
+      100% {
+        opacity: 0.34;
+      }
+      50% {
+        opacity: 1;
+      }
+    }
+
+    .ac-unit {
+      position: absolute;
+      top: 230px;
+      right: 148px;
+      width: 84px;
+      height: 40px;
+      border-radius: 8px;
+      border: 2px solid rgba(59, 130, 246, 0.25);
+      background: linear-gradient(180deg, #f8fafc, #dbeafe);
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 20px rgba(2, 6, 23, 0.28);
+    }
+
+    .ac-indicator {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #9ca3af;
+      box-shadow: none;
+      transition: background var(--transition), box-shadow var(--transition), transform var(--transition);
+    }
+
+    .camera {
+      position: absolute;
+      top: 238px;
+      width: 58px;
+      height: 24px;
+      border-radius: 10px;
+      border: 2px solid rgba(59, 130, 246, 0.25);
+      background: linear-gradient(180deg, #324c70, #1f3552);
+      z-index: 3;
+      transition: transform var(--transition), filter var(--transition);
+    }
+
+    .camera::after {
+      content: "";
+      position: absolute;
+      right: 7px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #93c5fd;
+      transition: background var(--transition), box-shadow var(--transition);
+    }
+
+    .camera.left {
+      left: 130px;
+      transform-origin: right center;
+    }
+
+    .camera.right {
+      right: 130px;
+      transform-origin: left center;
+    }
+
+    .exterior-lights {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity var(--transition);
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .beam {
+      position: absolute;
+      top: 264px;
+      width: 180px;
+      height: 170px;
+      background: linear-gradient(to bottom, rgba(255, 239, 156, 0.5), transparent);
+      clip-path: polygon(50% 0%, 90% 100%, 10% 100%);
+      animation: beam-wave 1.4s ease-in-out infinite;
+    }
+
+    .beam.left {
+      left: 208px;
+    }
+
+    .beam.right {
+      right: 208px;
+      animation-delay: 0.4s;
+    }
+
+    @keyframes beam-wave {
+      50% {
+        transform: translateY(4px);
+      }
+    }
+
+    .figures {
+      position: absolute;
+      left: 50%;
+      bottom: 74px;
+      transform: translateX(-50%);
+      width: 240px;
+      height: 90px;
+      opacity: 0;
+      transition: opacity 220ms ease;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .figure {
+      position: absolute;
+      width: 18px;
+      height: 36px;
+      bottom: 0;
+      border-radius: 12px;
+      background: rgba(2, 6, 23, 0.55);
+      opacity: 0;
+      animation: flee 1200ms linear forwards;
+    }
+
+    .figure::before {
+      content: "";
+      position: absolute;
+      top: -10px;
+      left: 1px;
+      width: 16px;
+      height: 16px;
+      border-radius: 999px;
+      background: inherit;
+    }
+
+    .figure.one {
+      left: 98px;
+      animation-delay: 50ms;
+    }
+
+    .figure.two {
+      left: 126px;
+      animation-delay: 150ms;
+    }
+
+    @keyframes flee {
+      0% {
+        transform: translate(0, 0) scale(0.9);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      100% {
+        transform: translate(110px, -18px) scale(0.68);
+        opacity: 0;
+      }
+    }
+
+    .legend {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+      padding: 12px 20px 16px;
+      border-top: 1px solid rgba(255, 255, 255, 0.07);
+      background: rgba(15, 23, 42, 0.82);
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+
+    .legend-item {
+      background: rgba(30, 41, 59, 0.72);
+      border: 1px solid rgba(59, 130, 246, 0.18);
+      border-radius: 10px;
+      padding: 8px 10px;
+    }
+
+    .scene[data-mode="sun"] .sun {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    .scene[data-mode="sun"] .moon {
+      opacity: 0;
+      transform: translateY(8px) scale(0.9);
+    }
+
+    .scene[data-mode="sun"] .g-light {
+      background: #6b85ad;
+      box-shadow: none;
+      transform: scale(0.9);
+    }
+
+    .scene[data-mode="sun"].sprinkler-boost .sprinklers {
+      opacity: 1;
+    }
+
+    .scene[data-mode="sun"] .ac-indicator {
+      background: #22d3ee;
+      box-shadow: 0 0 0 7px rgba(34, 211, 238, 0.2), 0 0 16px rgba(34, 211, 238, 0.65);
+      transform: scale(1.05);
+    }
+
+    .scene[data-mode="rain"] .sun {
+      opacity: 0;
+      transform: translateY(14px) scale(0.82);
+    }
+
+    .scene[data-mode="rain"] .moon {
+      opacity: 0;
+      transform: translateY(8px) scale(0.9);
+    }
+
+    .scene[data-mode="rain"] .rain-layer {
+      opacity: 1;
+    }
+
+    .scene[data-mode="rain"] .cloud {
+      opacity: 0.9;
+      transform: scale(1.06);
+    }
+
+    .scene[data-mode="rain"] .window-shutter {
+      transform: translateY(0);
+    }
+
+    .scene[data-mode="rain"] .ac-indicator {
+      background: var(--warn);
+      box-shadow: 0 0 0 7px rgba(249, 115, 22, 0.2), 0 0 16px rgba(249, 115, 22, 0.6);
+      transform: scale(1.05);
+    }
+
+    .scene[data-mode="moon"] .sun,
+    .scene[data-mode="lock"] .sun {
+      opacity: 0;
+      transform: translateY(12px) scale(0.8);
+    }
+
+    .scene[data-mode="moon"] .moon,
+    .scene[data-mode="lock"] .moon {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    .scene[data-mode="moon"] .house-window {
+      background: #fbbf24;
+      box-shadow: 0 0 16px rgba(251, 191, 36, 0.5);
+    }
+
+    .scene[data-mode="moon"] .g-light {
+      background: var(--night-light);
+      box-shadow: 0 0 0 6px rgba(255, 215, 122, 0.15), 0 0 20px rgba(255, 215, 122, 0.75);
+      transform: scale(1);
+    }
+
+    .scene[data-mode="moon"] .ground {
+      filter: brightness(0.66);
+    }
+
+    .scene[data-mode="lock"] .house-window {
+      background: #3c5b87;
+      box-shadow: none;
+    }
+
+    .scene[data-mode="lock"] .camera.left {
+      transform: rotate(-24deg);
+      filter: drop-shadow(0 4px 12px rgba(59, 130, 246, 0.45));
+    }
+
+    .scene[data-mode="lock"] .camera.right {
+      transform: rotate(24deg);
+      filter: drop-shadow(0 4px 12px rgba(59, 130, 246, 0.45));
+    }
+
+    .scene[data-mode="lock"] .camera::after {
+      background: var(--danger);
+      box-shadow: 0 0 0 7px rgba(239, 68, 68, 0.2), 0 0 14px rgba(239, 68, 68, 0.66);
+    }
+
+    .scene[data-mode="lock"] .exterior-lights {
+      opacity: 1;
+    }
+
+    .scene[data-mode="lock"] .figures {
+      opacity: 1;
+    }
+
+    .scene[data-mode="lock"] .figure {
+      opacity: 1;
+    }
+
+    .scene[data-mode="lock"] .g-light {
+      background: var(--night-light);
+      box-shadow: 0 0 0 6px rgba(255, 215, 122, 0.15), 0 0 20px rgba(255, 215, 122, 0.75);
+    }
+
+    .scene[data-mode="lock"] .ground {
+      filter: brightness(0.58);
+    }
+
+    @media (max-width: 860px) {
+      .demo-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .controls {
+        margin-top: 6px;
+      }
+
+      .scene {
+        min-height: 620px;
+      }
+
+      .smart-house-wrap {
+        transform: translate(-50%, -44%) scale(0.9);
+      }
+
+      .beam.left {
+        left: 140px;
+      }
+
+      .beam.right {
+        right: 140px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .smart-house-wrap {
+        transform: translate(-50%, -42%) scale(0.8);
+      }
+
+      .ac-unit {
+        right: 74px;
+      }
+
+      .camera.left {
+        left: 68px;
+      }
+
+      .camera.right {
+        right: 68px;
+      }
+
+      .beam.left {
+        left: 56px;
+      }
+
+      .beam.right {
+        right: 56px;
+      }
+
+      .legend {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="demo">
+    <header class="demo-header">
+      <div class="title">
+        <h1>Intellilar Smart Home Automation</h1>
+        <p>Select a scenario to preview each automation action.</p>
+      </div>
+
+      <div class="controls" role="tablist" aria-label="Automation modes">
+        <button class="mode-btn active" data-mode="sun" role="tab" aria-selected="true" aria-label="Sun mode">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="12" cy="12" r="4"></circle>
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path>
+          </svg>
+          <span class="label">Sun</span>
+        </button>
+
+        <button class="mode-btn" data-mode="rain" role="tab" aria-selected="false" aria-label="Rain mode">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M19 16.9A5 5 0 0 0 17 7H7a4 4 0 1 0 0 8h12z"></path>
+            <path d="M8 19v2M12 19v2M16 19v2"></path>
+          </svg>
+          <span class="label">Rain</span>
+        </button>
+
+        <button class="mode-btn" data-mode="moon" role="tab" aria-selected="false" aria-label="Moon mode">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M21 12.8A9 9 0 1 1 11.2 3c0 5 3.8 8.8 8.8 9.8z"></path>
+          </svg>
+          <span class="label">Moon</span>
+        </button>
+
+        <button class="mode-btn" data-mode="lock" role="tab" aria-selected="false" aria-label="Lock mode">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <rect x="3" y="11" width="18" height="10" rx="2"></rect>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+          </svg>
+          <span class="label">Lock</span>
+        </button>
+      </div>
+    </header>
+
+    <section class="scene" id="scene" data-mode="sun" aria-live="polite">
+      <p class="status" id="status">Sun mode: garden lights off, sprinklers pulse, AC cooling on.</p>
+
+      <div class="weather" aria-hidden="true">
+        <div class="sun"></div>
+        <div class="moon"></div>
+        <div class="cloud one"></div>
+        <div class="cloud two"></div>
+        <div class="rain-layer"></div>
+      </div>
+
+      <div class="ground"></div>
+
+      <div class="smart-house-wrap" aria-label="Smart home animation">
+        <svg class="connection-svg" viewBox="0 0 420 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <line class="data-line" x1="82" y1="56" x2="175" y2="185"></line>
+          <line class="data-line" x1="338" y1="56" x2="245" y2="185" style="animation-delay: 0.5s"></line>
+          <line class="data-line" x1="36" y1="290" x2="175" y2="255" style="animation-delay: 1s"></line>
+          <line class="data-line" x1="384" y1="290" x2="245" y2="255" style="animation-delay: 1.5s"></line>
+        </svg>
+
+        <div class="house">
+          <div class="house-chimney"></div>
+          <div class="house-roof"></div>
+          <div class="house-wall">
+            <div class="house-window left">
+              <div class="window-shutter"></div>
+            </div>
+            <div class="house-window right">
+              <div class="window-shutter"></div>
+            </div>
+            <div class="house-door"></div>
+          </div>
+        </div>
+
+        <div class="device-node sun" aria-hidden="true">
+          <div class="pulse-ring"></div>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="4"></circle>
+          </svg>
+          <span class="node-label">Day</span>
+        </div>
+
+        <div class="device-node rain" aria-hidden="true">
+          <div class="pulse-ring"></div>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M19 16.9A5 5 0 0 0 17 7H7a4 4 0 1 0 0 8h12z"></path>
+          </svg>
+          <span class="node-label">Rain</span>
+        </div>
+
+        <div class="device-node moon" aria-hidden="true">
+          <div class="pulse-ring"></div>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12.8A9 9 0 1 1 11.2 3c0 5 3.8 8.8 8.8 9.8z"></path>
+          </svg>
+          <span class="node-label">Night</span>
+        </div>
+
+        <div class="device-node lock" aria-hidden="true">
+          <div class="pulse-ring"></div>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="11" width="18" height="10" rx="2"></rect>
+          </svg>
+          <span class="node-label">Secure</span>
+        </div>
+      </div>
+
+      <div class="garden-lights" aria-hidden="true">
+        <span class="g-light"></span>
+        <span class="g-light"></span>
+        <span class="g-light"></span>
+        <span class="g-light"></span>
+      </div>
+
+      <div class="sprinklers" aria-hidden="true">
+        <div class="spray left"></div>
+        <div class="spray right"></div>
+      </div>
+
+      <div class="ac-unit" aria-hidden="true">
+        <span class="ac-indicator"></span>
+      </div>
+
+      <div class="camera left" aria-hidden="true"></div>
+      <div class="camera right" aria-hidden="true"></div>
+
+      <div class="exterior-lights" aria-hidden="true">
+        <div class="beam left"></div>
+        <div class="beam right"></div>
+      </div>
+
+      <div class="figures" aria-hidden="true">
+        <div class="figure one"></div>
+        <div class="figure two"></div>
+      </div>
+    </section>
+
+    <section class="legend" aria-hidden="true">
+      <p class="legend-item">Sun: garden lights OFF, sprinklers pulse briefly, AC cooling turns ON.</p>
+      <p class="legend-item">Rain: windows close and AC changes to heating mode.</p>
+      <p class="legend-item">Moon: garden lights and interior house lights turn ON.</p>
+      <p class="legend-item">Lock: cameras arm, exterior lights cast beams, shadow figures flee.</p>
+    </section>
+  </main>
+
+  <script>
+    (function () {
+      const scene = document.getElementById("scene");
+      const status = document.getElementById("status");
+      const buttons = Array.from(document.querySelectorAll(".mode-btn"));
+
+      const modeMessages = {
+        sun: "Sun mode: garden lights off, sprinklers pulse, AC cooling on.",
+        rain: "Rain mode: windows close and AC switches to heating mode.",
+        moon: "Moon mode: garden and interior lights illuminate.",
+        lock: "Lock mode: security cameras armed and exterior floodlights activated."
+      };
+
+      function restartFleeingFigures() {
+        document.querySelectorAll(".figure").forEach((figure) => {
+          figure.style.animation = "none";
+          void figure.offsetWidth;
+          figure.style.animation = "";
+        });
+      }
+
+      function pulseSprinklersBriefly() {
+        scene.classList.remove("sprinkler-boost");
+        void scene.offsetWidth;
+        scene.classList.add("sprinkler-boost");
+        window.setTimeout(() => {
+          scene.classList.remove("sprinkler-boost");
+        }, 1800);
+      }
+
+      function setMode(mode) {
+        scene.setAttribute("data-mode", mode);
+        status.textContent = modeMessages[mode];
+
+        buttons.forEach((btn) => {
+          const isActive = btn.dataset.mode === mode;
+          btn.classList.toggle("active", isActive);
+          btn.setAttribute("aria-selected", String(isActive));
+        });
+
+        if (mode === "sun") {
+          pulseSprinklersBriefly();
+        }
+
+        if (mode === "lock") {
+          restartFleeingFigures();
+        }
+      }
+
+      buttons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          setMode(btn.dataset.mode);
+        });
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key !== "ArrowRight" && event.key !== "ArrowLeft") {
+          return;
+        }
+
+        const modes = buttons.map((btn) => btn.dataset.mode);
+        const currentMode = scene.getAttribute("data-mode");
+        const currentIndex = modes.indexOf(currentMode);
+        const step = event.key === "ArrowRight" ? 1 : -1;
+        const nextIndex = (currentIndex + step + modes.length) % modes.length;
+        setMode(modes[nextIndex]);
+      });
+    })();
+  </script>
+</body>
+</html>

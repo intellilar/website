@@ -240,6 +240,55 @@ h3 { font-size: 1.2rem; }
   overflow: hidden;
 }
 
+.hero--full-bleed {
+  padding-top: 80px;
+  padding-bottom: 0;
+}
+
+.hero--full-bleed .container {
+  max-width: none;
+  width: 100%;
+  padding: 0;
+}
+
+.hero--full-bleed .hero-inner {
+  display: block;
+}
+
+.hero--full-bleed .hero-visual {
+  display: block;
+}
+
+.hero--animation-only {
+  min-height: 0;
+  display: block;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.hero--animation-only .container {
+  max-width: none;
+  width: 100%;
+  padding: 0;
+}
+
+.hero-animation-embed {
+  position: relative;
+  min-height: min(78vh, 760px);
+  overflow: hidden;
+  border-top: 1px solid rgba(59,130,246,0.25);
+  border-bottom: 1px solid rgba(59,130,246,0.25);
+  background: #000;
+}
+
+.hero-animation-embed__frame {
+  display: block;
+  width: 100%;
+  height: min(78vh, 760px);
+  border: 0;
+  background: #000;
+}
+
 .hero::before {
   content: '';
   position: absolute;
@@ -251,7 +300,7 @@ h3 { font-size: 1.2rem; }
 
 .hero-inner {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1.14fr;
   gap: 64px;
   align-items: center;
 }
@@ -1564,4 +1613,639 @@ footer {
   .hero-actions .btn { width: 100%; justify-content: center; }
   .contato-options { gap: 12px; }
   .btn-whatsapp, .btn-email { padding: 14px 24px; }
+}
+
+/* =====================================================
+   Hero Automation Scene (restarted from reference)
+   ===================================================== */
+.automation-hero {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  position: relative;
+}
+
+.hero--full-bleed .automation-hero {
+  width: 100%;
+}
+
+.hero--full-bleed .automation-controls {
+  position: absolute;
+  top: 16px;
+  right: 24px;
+  z-index: 30;
+}
+
+.automation-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.automation-mode-btn {
+  width: 58px;
+  height: 58px;
+  border-radius: 14px;
+  border: 1px solid rgba(59,130,246,0.25);
+  background: rgba(30,41,59,0.92);
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  cursor: pointer;
+  transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition), background var(--transition);
+}
+
+.automation-mode-btn span {
+  font-size: 0.64rem;
+  color: var(--text-muted);
+}
+
+.automation-mode-btn:hover,
+.automation-mode-btn:focus-visible {
+  outline: none;
+  transform: translateY(-2px);
+  border-color: var(--accent-glow);
+  box-shadow: 0 8px 20px rgba(59,130,246,0.28);
+}
+
+.automation-mode-btn.active {
+  border-color: var(--accent-glow);
+  background: rgba(59,130,246,0.18);
+  box-shadow: 0 0 0 2px rgba(59,130,246,0.2), 0 10px 24px rgba(59,130,246,0.3);
+}
+
+.automation-stage {
+  position: relative;
+  min-height: min(78vh, 760px);
+  border-radius: 0;
+  overflow: hidden;
+  border-top: 1px solid rgba(59,130,246,0.25);
+  border-bottom: 1px solid rgba(59,130,246,0.25);
+  border-left: 0;
+  border-right: 0;
+  background: #0a1e44;
+}
+
+.hero-sky-copy {
+  position: absolute;
+  top: clamp(78px, 12vh, 130px);
+  left: clamp(20px, 6vw, 84px);
+  max-width: 560px;
+  z-index: 24;
+}
+
+.hero--full-bleed .hero-sky-copy .hero-title {
+  color: #eef6ff;
+  text-shadow: 0 12px 40px rgba(3, 8, 20, 0.45);
+  margin-bottom: 14px;
+}
+
+.hero--full-bleed .hero-sky-copy .hero-sub {
+  max-width: 560px;
+  margin-bottom: 0;
+  color: rgba(226, 236, 252, 0.88);
+  text-shadow: 0 8px 30px rgba(3, 8, 20, 0.5);
+}
+
+.automation-stage #sky {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, #0957bc 0%, #053c89 100%);
+  transition: background 0.5s ease;
+}
+
+.automation-stage #stars {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 4% 8%, rgba(255,255,255,0.9) 0 1px, transparent 1.2px),
+    radial-gradient(circle at 13% 21%, rgba(255,255,255,0.8) 0 1px, transparent 1.2px),
+    radial-gradient(circle at 26% 11%, rgba(255,255,255,0.8) 0 1px, transparent 1.2px),
+    radial-gradient(circle at 35% 23%, rgba(255,255,255,0.85) 0 1px, transparent 1.2px),
+    radial-gradient(circle at 49% 14%, rgba(255,255,255,0.85) 0 1px, transparent 1.2px),
+    radial-gradient(circle at 61% 26%, rgba(255,255,255,0.76) 0 1px, transparent 1.2px),
+    radial-gradient(circle at 73% 17%, rgba(255,255,255,0.9) 0 1px, transparent 1.2px),
+    radial-gradient(circle at 86% 9%, rgba(255,255,255,0.8) 0 1px, transparent 1.2px),
+    radial-gradient(circle at 93% 24%, rgba(255,255,255,0.8) 0 1px, transparent 1.2px);
+  opacity: 0.2;
+  animation: bgAnimation 8s linear infinite;
+}
+
+@keyframes bgAnimation {
+  0%, 100% { background-position: 0 0; }
+  50% { background-position: 55px 0; }
+}
+
+.automation-stage .asteroid {
+  position: absolute;
+  top: -180px;
+  left: -180px;
+  width: 200px;
+  height: 200px;
+  opacity: 0;
+  animation: asteroidAnimation 6s ease-in infinite;
+  animation-delay: 2s;
+}
+
+.automation-stage .asteroid.a2 {
+  top: -190px;
+  left: 420px;
+  animation: asteroidAnimationTwo 7s ease-in infinite;
+  animation-delay: 4s;
+}
+
+.automation-stage .asteroid-head {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 8px 2px #fff;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.automation-stage .asteroid-tail {
+  width: 0;
+  height: 0;
+  border-left: 3px solid transparent;
+  border-bottom: 170px solid rgba(255,255,255,0.92);
+  border-right: 3px solid transparent;
+  position: absolute;
+  bottom: -22px;
+  right: 68px;
+  transform: rotate(-45deg);
+}
+
+@keyframes asteroidAnimation {
+  0% { top: -180px; left: -180px; opacity: 0; }
+  6% { opacity: 0.8; }
+  18% { top: 220px; left: 220px; opacity: 0; }
+  100% { opacity: 0; }
+}
+
+@keyframes asteroidAnimationTwo {
+  0% { top: -190px; left: 420px; opacity: 0; }
+  6% { opacity: 0.7; }
+  18% { top: 320px; left: 980px; opacity: 0; }
+  100% { opacity: 0; }
+}
+
+.automation-stage #moon {
+  position: absolute;
+  right: 10%;
+  top: 10%;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+.automation-stage #moon {
+  background: #ffff8c;
+  box-shadow: 0 0 100px rgba(255,255,140,0.75);
+  opacity: 0;
+  transform: translateY(6px) scale(0.9);
+  animation: moonAnimation 3s infinite;
+}
+
+.automation-stage #moon .crater,
+.automation-stage #moon .crater2,
+.automation-stage #moon .crater3,
+.automation-stage #moon .crater4,
+.automation-stage #moon .crater5,
+.automation-stage #moon .crater6,
+.automation-stage #moon .crater7 {
+  position: absolute;
+  background: #e3e693;
+}
+
+.automation-stage #moon .crater {
+  top: 30px;
+  left: 40px;
+  width: 25px;
+  height: 45px;
+  border-radius: 50px / 100px;
+  transform: rotate(40deg);
+}
+
+.automation-stage #moon .crater2 {
+  top: 125px;
+  right: 20px;
+  width: 15px;
+  height: 20px;
+  border-radius: 20px 20px 20px 30px / 20px 20px 30px 30px;
+  transform: rotate(-60deg);
+}
+
+.automation-stage #moon .crater3 { top: 120px; left: 60px; width: 10px; height: 10px; border-radius: 50%; }
+.automation-stage #moon .crater4 { top: 90px; right: 90px; width: 10px; height: 10px; border-radius: 50%; }
+.automation-stage #moon .crater5 { top: 50px; left: 120px; width: 30px; height: 35px; border-radius: 50%; transform: rotate(120deg); }
+.automation-stage #moon .crater6 { bottom: 15px; left: 80px; width: 15px; height: 15px; border-radius: 50%; }
+.automation-stage #moon .crater7 { bottom: 15px; left: 130px; width: 5px; height: 5px; border-radius: 50%; }
+
+.automation-stage .tuja {
+  width: 26px;
+  height: 132px;
+  background: #000;
+  position: absolute;
+  bottom: 70px;
+  left: 11%;
+  border-radius: 18px / 100px;
+  z-index: 8;
+}
+
+.automation-stage .tuja.two {
+  left: 16%;
+  height: 148px;
+}
+
+.automation-stage #house {
+  position: absolute;
+  left: 30%;
+  bottom: 72px;
+  width: 300px;
+  height: 130px;
+  background: #000;
+  z-index: 10;
+}
+
+.automation-stage #roof {
+  width: 0;
+  height: 0;
+  border-left: 190px solid transparent;
+  border-bottom: 110px solid #000;
+  border-right: 190px solid transparent;
+  position: absolute;
+  top: -100px;
+  left: -40px;
+}
+
+.automation-stage #house .window {
+  position: absolute;
+  top: 20px;
+  left: 60px;
+  width: 50px;
+  height: 70px;
+  border: 3px solid #000;
+  background: rgba(243,225,5,0.5);
+  box-shadow: 0 0 60px rgba(243,225,5,0.3);
+  animation: windowAnimation 3s infinite;
+}
+
+.automation-stage #house .line1 {
+  position: absolute;
+  left: 22px;
+  width: 3px;
+  height: 70px;
+  background: #000;
+  z-index: 2;
+}
+
+.automation-stage #house .line2 {
+  position: absolute;
+  top: 34px;
+  width: 50px;
+  height: 3px;
+  background: #000;
+  z-index: 2;
+}
+
+.automation-stage #alien {
+  position: absolute;
+  right: 12%;
+  bottom: -70px;
+  width: 50px;
+  height: 70px;
+  background: #000;
+  border-top-left-radius: 100px;
+  border-top-right-radius: 100px;
+  border-bottom-left-radius: 100px 150px;
+  border-bottom-right-radius: 100px 150px;
+  z-index: 9;
+  animation: alienAnimation 10s infinite;
+}
+
+.automation-stage #alien .eye,
+.automation-stage #alien .eyeR {
+  position: absolute;
+  top: 15px;
+  width: 15px;
+  height: 15px;
+  background: rgba(243,225,5,0.35);
+  border-radius: 50%;
+}
+
+.automation-stage #alien .eye { left: 6px; }
+.automation-stage #alien .eyeR { right: 6px; }
+
+.automation-stage #cover {
+  position: absolute;
+  right: 10%;
+  bottom: 0;
+  width: 70px;
+  height: 70px;
+  background: #000;
+  z-index: 10;
+}
+
+@keyframes alienAnimation {
+  0%, 40%, 100% { bottom: -70px; }
+  20% { bottom: -30px; }
+}
+
+.automation-stage .grass,
+.automation-stage .grassL {
+  position: absolute;
+  bottom: 0;
+  left: 3%;
+  height: 20px;
+  width: 10px;
+  z-index: 11;
+}
+
+.automation-stage .grass {
+  border-left: 5px solid #000;
+  border-top-left-radius: 50px 200px;
+  animation: grassAnimation 2s linear infinite;
+}
+
+.automation-stage .grassL {
+  border-right: 5px solid #000;
+  border-top-right-radius: 50px 200px;
+  animation: grassLAnimation 2s linear infinite;
+  animation-delay: 3s;
+}
+
+.automation-stage .g1 { left: 5%; height: 26px; }
+.automation-stage .g2 { left: 8%; height: 16px; }
+.automation-stage .g3 { left: 10%; height: 22px; }
+.automation-stage .g4 { left: 15%; height: 18px; }
+.automation-stage .g5 { left: 16%; height: 26px; }
+.automation-stage .g6 { left: 20%; height: 20px; }
+.automation-stage .g7 { left: 23%; height: 22px; }
+.automation-stage .g8 { left: 27%; height: 26px; }
+.automation-stage .g9 { left: 33%; height: 17px; }
+.automation-stage .g10 { left: 37%; height: 24px; }
+.automation-stage .g11 { left: 39%; height: 26px; }
+.automation-stage .g12 { left: 42%; height: 16px; }
+.automation-stage .g13 { left: 45%; height: 22px; }
+.automation-stage .g14 { left: 48%; height: 18px; }
+.automation-stage .g15 { left: 50%; height: 26px; }
+.automation-stage .g16 { left: 53%; height: 20px; }
+.automation-stage .g17 { left: 58%; height: 22px; }
+.automation-stage .g18 { left: 60%; height: 26px; }
+.automation-stage .g19 { left: 62%; height: 17px; }
+.automation-stage .g20 { left: 65%; height: 24px; }
+.automation-stage .g21 { left: 67%; height: 26px; }
+.automation-stage .g22 { left: 68%; height: 16px; }
+.automation-stage .g23 { left: 70%; height: 22px; }
+.automation-stage .g24 { left: 72%; height: 18px; }
+.automation-stage .g25 { left: 74%; height: 26px; }
+.automation-stage .g26 { left: 75%; height: 20px; }
+.automation-stage .g27 { left: 78%; height: 22px; }
+.automation-stage .g28 { left: 80%; height: 26px; }
+.automation-stage .g29 { left: 82%; height: 17px; }
+.automation-stage .g30 { left: 83%; height: 24px; }
+.automation-stage .g31 { left: 85%; height: 26px; }
+.automation-stage .g32 { left: 87%; height: 16px; }
+.automation-stage .g33 { left: 89%; height: 22px; }
+.automation-stage .g34 { left: 91%; height: 18px; }
+.automation-stage .g35 { left: 92%; height: 26px; }
+.automation-stage .g36 { left: 94%; height: 20px; }
+.automation-stage .g37 { left: 96%; height: 22px; }
+
+.automation-stage .gL1 { left: 1%; height: 26px; }
+.automation-stage .gL2 { left: 3%; height: 16px; }
+.automation-stage .gL3 { left: 4%; height: 22px; }
+.automation-stage .gL4 { left: 6%; height: 18px; }
+.automation-stage .gL5 { left: 8%; height: 26px; }
+.automation-stage .gL6 { left: 11%; height: 20px; }
+.automation-stage .gL7 { left: 12%; height: 22px; }
+.automation-stage .gL8 { left: 15%; height: 26px; }
+.automation-stage .gL9 { left: 17%; height: 17px; }
+.automation-stage .gL10 { left: 19%; height: 24px; }
+.automation-stage .gL11 { left: 22%; height: 26px; }
+.automation-stage .gL12 { left: 26%; height: 16px; }
+.automation-stage .gL13 { left: 27%; height: 22px; }
+.automation-stage .gL14 { left: 29%; height: 18px; }
+.automation-stage .gL15 { left: 30%; height: 26px; }
+.automation-stage .gL16 { left: 33%; height: 20px; }
+.automation-stage .gL17 { left: 35%; height: 22px; }
+.automation-stage .gL18 { left: 37%; height: 26px; }
+.automation-stage .gL19 { left: 40%; height: 17px; }
+.automation-stage .gL20 { left: 43%; height: 24px; }
+.automation-stage .gL21 { left: 48%; height: 26px; }
+.automation-stage .gL22 { left: 51%; height: 16px; }
+.automation-stage .gL23 { left: 53%; height: 22px; }
+.automation-stage .gL24 { left: 56%; height: 18px; }
+.automation-stage .gL25 { left: 58%; height: 26px; }
+.automation-stage .gL26 { left: 60%; height: 20px; }
+.automation-stage .gL27 { left: 62%; height: 22px; }
+.automation-stage .gL28 { left: 64%; height: 26px; }
+.automation-stage .gL29 { left: 66%; height: 17px; }
+.automation-stage .gL30 { left: 68%; height: 24px; }
+.automation-stage .gL31 { left: 71%; height: 26px; }
+.automation-stage .gL32 { left: 73%; height: 16px; }
+.automation-stage .gL33 { left: 76%; height: 22px; }
+.automation-stage .gL34 { left: 79%; height: 18px; }
+.automation-stage .gL35 { left: 81%; height: 26px; }
+.automation-stage .gL36 { left: 83%; height: 20px; }
+.automation-stage .gL37 { left: 85%; height: 22px; }
+.automation-stage .gL38 { left: 88%; height: 26px; }
+.automation-stage .gL39 { left: 90%; height: 17px; }
+.automation-stage .gL40 { left: 93%; height: 24px; }
+.automation-stage .gL41 { left: 95%; height: 24px; }
+.automation-stage .gL42 { left: 97%; height: 24px; }
+
+@keyframes grassAnimation {
+  0%, 100% { border-top-left-radius: 50px 200px; }
+  50% { border-top-left-radius: 30px 50px; }
+}
+
+@keyframes grassLAnimation {
+  0%, 100% { border-top-right-radius: 50px 200px; }
+  50% { border-top-right-radius: 30px 50px; }
+}
+
+@keyframes windowAnimation {
+  0%, 100% { box-shadow: 0 0 40px #ff0; }
+  50% { box-shadow: 0 0 60px #ff0; }
+}
+
+@keyframes moonAnimation {
+  0%, 100% { box-shadow: 0 0 100px #ffff8c; }
+  50% { box-shadow: 0 0 140px #ffff8c; }
+}
+
+.automation-stage .rain {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 12;
+  transition: opacity 0.35s ease;
+}
+
+.automation-stage .rain.back-row {
+  transform: translateX(-20px);
+  filter: blur(0.35px);
+}
+
+.automation-stage .rain .drop {
+  position: absolute;
+  bottom: 100%;
+  width: 18px;
+  height: 130px;
+  animation-name: drop;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.automation-stage .rain .stem {
+  width: 2px;
+  height: 58%;
+  margin-left: 8px;
+  transform: rotate(12deg);
+  background: linear-gradient(to bottom, rgba(125,211,252,0), rgba(147,197,253,0.95));
+  animation-name: stem;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.automation-stage .rain .splat {
+  width: 16px;
+  height: 10px;
+  margin-left: 1px;
+  border-top: 2px dotted rgba(186,230,253,0.95);
+  border-radius: 50%;
+  transform: scale(0);
+  animation-name: splat;
+  animation-timing-function: ease-out;
+  animation-iteration-count: infinite;
+}
+
+@keyframes drop {
+  0% { transform: translate3d(0,0,0); }
+  80%, 100% { transform: translate3d(32px,640px,0); }
+}
+
+@keyframes stem {
+  0%, 65% { opacity: 1; }
+  76%, 100% { opacity: 0; }
+}
+
+@keyframes splat {
+  0%, 80% { opacity: 0; transform: scale(0); }
+  90% { opacity: 0.85; transform: scale(1); }
+  100% { opacity: 0; transform: scale(1.55); }
+}
+
+
+/* Mode states */
+.automation-stage[data-mode="sun"] #sky {
+  background: linear-gradient(to bottom, #0d6de3 0%, #0a4ea5 100%);
+}
+
+.automation-stage[data-mode="sun"] #stars,
+.automation-stage[data-mode="rain"] #stars {
+  opacity: 0.08;
+}
+
+.automation-stage[data-mode="sun"] #moon {
+  opacity: 0;
+}
+
+.automation-stage[data-mode="sun"] .asteroid {
+  opacity: 0;
+}
+
+.automation-stage[data-mode="rain"] #sky {
+  background: linear-gradient(to bottom, #28599a 0%, #173b73 100%);
+}
+
+.automation-stage[data-mode="rain"] #moon {
+  opacity: 0;
+}
+
+.automation-stage[data-mode="rain"] .rain.front-row,
+.automation-stage[data-mode="rain"] .rain.back-row {
+  opacity: 1;
+}
+
+.automation-stage[data-mode="moon"],
+.automation-stage[data-mode="lock"] {
+  border-color: rgba(99,102,241,0.28);
+}
+
+.automation-stage[data-mode="moon"] #sky,
+.automation-stage[data-mode="lock"] #sky {
+  background: linear-gradient(to bottom, #0e2352 0%, #061634 100%);
+}
+
+.automation-stage[data-mode="moon"] #stars,
+.automation-stage[data-mode="lock"] #stars {
+  opacity: 0.48;
+}
+
+.automation-stage[data-mode="moon"] #moon,
+.automation-stage[data-mode="lock"] #moon {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.automation-stage[data-mode="moon"] .asteroid,
+.automation-stage[data-mode="lock"] .asteroid {
+  opacity: 1;
+}
+
+.automation-stage[data-mode="moon"] #house .window {
+  background: rgba(243,225,5,0.55);
+  box-shadow: 0 0 55px rgba(243,225,5,0.45);
+}
+
+.automation-stage[data-mode="lock"] #house .window {
+  background: rgba(117,150,194,0.38);
+  box-shadow: none;
+}
+
+@media (max-width: 1024px) {
+  .hero--full-bleed .automation-controls {
+    position: static;
+    justify-content: center;
+    padding: 10px 14px 0;
+  }
+
+  .automation-stage { min-height: 620px; }
+  .automation-stage #house { left: 24%; transform: scale(0.94); transform-origin: left bottom; }
+}
+
+@media (max-width: 768px) {
+  .hero-sky-copy {
+    top: 90px;
+    left: 20px;
+    right: 20px;
+    max-width: none;
+  }
+
+  .hero--full-bleed .hero-sky-copy .hero-sub {
+    max-width: 96%;
+    font-size: 1.02rem;
+  }
+
+  .automation-stage #house { left: 18%; transform: scale(0.82); }
+  .automation-stage .tuja { transform: scale(0.9); }
+}
+
+@media (max-width: 640px) {
+  .hero-sky-copy {
+    top: 88px;
+  }
+
+  .automation-stage #house { left: 8%; transform: scale(0.72); }
 }

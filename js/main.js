@@ -138,3 +138,60 @@ if (form) {
     }
   });
 }
+
+// ── Hero automation scene ────────────────────────────
+(function initAutomationHero() {
+  const stage = document.getElementById('automation-stage');
+  const modeButtons = Array.from(document.querySelectorAll('.automation-mode-btn'));
+  const frontRain = document.querySelector('.rain.front-row');
+  const backRain = document.querySelector('.rain.back-row');
+
+  if (!stage || modeButtons.length === 0 || !frontRain || !backRain) return;
+
+  const buildRain = (target, density = 48, seedOffset = 0) => {
+    let html = '';
+    for (let i = 0; i < density; i += 1) {
+      const left = ((i * 37 + seedOffset * 53) % 100) + Math.random();
+      const delay = Math.random() * 1.2;
+      const duration = 0.42 + Math.random() * 0.35;
+      const opacity = 0.34 + Math.random() * 0.45;
+      const stemHeight = 52 + Math.round(Math.random() * 22);
+
+      html += `
+        <div class="drop" style="left:${left.toFixed(2)}%;opacity:${opacity.toFixed(2)};animation-delay:${delay.toFixed(2)}s;animation-duration:${duration.toFixed(2)}s;">
+          <div class="stem" style="height:${stemHeight}%;animation-delay:${delay.toFixed(2)}s;animation-duration:${duration.toFixed(2)}s;"></div>
+          <div class="splat" style="animation-delay:${delay.toFixed(2)}s;animation-duration:${duration.toFixed(2)}s;"></div>
+        </div>
+      `;
+    }
+    target.innerHTML = html;
+  };
+
+  buildRain(frontRain, 68, 1);
+  buildRain(backRain, 54, 11);
+
+  const setMode = (mode) => {
+    stage.setAttribute('data-mode', mode);
+
+    modeButtons.forEach((btn) => {
+      const isActive = btn.dataset.mode === mode;
+      btn.classList.toggle('active', isActive);
+      btn.setAttribute('aria-selected', String(isActive));
+    });
+
+  };
+
+  modeButtons.forEach((btn) => {
+    btn.addEventListener('click', () => setMode(btn.dataset.mode));
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key !== 'ArrowRight' && event.key !== 'ArrowLeft') return;
+    const modes = modeButtons.map((btn) => btn.dataset.mode);
+    const activeMode = stage.getAttribute('data-mode') || 'sun';
+    const index = modes.indexOf(activeMode);
+    const step = event.key === 'ArrowRight' ? 1 : -1;
+    const next = (index + step + modes.length) % modes.length;
+    setMode(modes[next]);
+  });
+})();
