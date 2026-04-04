@@ -2091,9 +2091,11 @@ footer {
 
 /* ── Responsive ─────────────────────────────────────── */
 @media (max-width: 1024px) {
+  .hero { padding-top: 120px; }
   .hero-inner { grid-template-columns: 1fr; gap: 48px; }
   .hero-visual { order: -1; }
   .smart-house-wrap { width: 320px; height: 320px; }
+
   .hero-sub { max-width: 100%; }
   section { padding: 72px 0; }
 }
@@ -2115,6 +2117,10 @@ footer {
   .tech-grid { gap: 10px; }
   .tech-badge { padding: 10px 16px; }
   .smart-house-wrap { width: 260px; height: 260px; }
+  .device-node--wifi   { top: 8px;   left: 8px;  }
+  .device-node--light  { top: 8px;   right: 8px; }
+  .device-node--thermo { bottom: 36px; left: -28px; }
+  .device-node--lock   { bottom: 36px; right: -28px; }
   .hero-actions { flex-direction: column; }
   .hero-actions .btn { width: 100%; justify-content: center; }
   .contato-options { gap: 12px; }
