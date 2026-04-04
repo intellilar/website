@@ -2,6 +2,49 @@
    IntelliLar Landing Page — main.js
    ===================================================== */
 
+// ── Theme toggle (light/dark) ────────────────────────
+const THEME_STORAGE_KEY = 'intellilar-theme';
+const THEME_META_COLORS = {
+  dark: '#0f172a',
+  light: '#f3f7ff'
+};
+
+const rootElement = document.documentElement;
+const themeToggle = document.getElementById('theme-toggle');
+const themeColorMeta = document.getElementById('theme-color-meta');
+
+function applyTheme(theme) {
+  const normalizedTheme = theme === 'light' ? 'light' : 'dark';
+  rootElement.setAttribute('data-theme', normalizedTheme);
+
+  if (themeToggle) {
+    const nextActionLabel = normalizedTheme === 'dark' ? 'Ativar tema claro' : 'Ativar tema escuro';
+    themeToggle.setAttribute('aria-label', nextActionLabel);
+    themeToggle.setAttribute('title', nextActionLabel);
+    themeToggle.setAttribute('aria-pressed', normalizedTheme === 'light' ? 'true' : 'false');
+  }
+
+  if (themeColorMeta) {
+    themeColorMeta.setAttribute('content', THEME_META_COLORS[normalizedTheme]);
+  }
+}
+
+applyTheme(rootElement.getAttribute('data-theme'));
+
+if (themeToggle) {
+  themeToggle.addEventListener('click', () => {
+    const currentTheme = rootElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+    const nextTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    applyTheme(nextTheme);
+
+    try {
+      localStorage.setItem(THEME_STORAGE_KEY, nextTheme);
+    } catch (e) {
+      // Keep working without persistence if storage is blocked.
+    }
+  });
+}
+
 // ── Marquee ───────────────────────────────────────────
 (function initMarquees() {
   document.querySelectorAll('.marquee-track').forEach(track => {

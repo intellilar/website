@@ -1,6 +1,6 @@
 /* =====================================================
-   IntelliLar Landing Page — style.css  (dark mode only)
-   ===================================================== */
+  IntelliLar Landing Page — style.css
+  ===================================================== */
 
 /* ── Variables ──────────────────────────────────────── */
 :root {
@@ -19,6 +19,25 @@
   --radius-lg:    20px;
   --transition:   0.3s ease;
   --navbar-bg:    rgba(15, 23, 42, 0.92);
+  --logo-filter:  none;
+  --chimney-smoke-color: rgba(241,245,249,0.8);
+}
+
+html[data-theme='light'] {
+  --bg:           #f3f7ff;
+  --bg-surface:   #ffffff;
+  --bg-surface2:  #e7eef9;
+  --bg-alt:       #eef4ff;
+  --accent:       #1d4ed8;
+  --accent-glow:  #3b82f6;
+  --accent-green: #059669;
+  --text:         #0f172a;
+  --text-muted:   #475569;
+  --border:       rgba(29, 78, 216, 0.2);
+  --border-subtle:rgba(15, 23, 42, 0.12);
+  --navbar-bg:    rgba(243, 247, 255, 0.92);
+  --logo-filter:  invert(1) brightness(0.12);
+  --chimney-smoke-color: rgba(51,65,85,0.55);
 }
 
 /* ── Reset & Base ───────────────────────────────────── */
@@ -32,6 +51,7 @@ body {
   color: var(--text);
   line-height: 1.6;
   overflow-x: hidden;
+  transition: background var(--transition), color var(--transition);
 }
 
 img { max-width: 100%; display: block; }
@@ -153,6 +173,12 @@ h3 { font-size: 1.2rem; }
   gap: 4px;
 }
 
+.navbar-logo img,
+.footer-logo img {
+  filter: var(--logo-filter);
+  transition: filter var(--transition);
+}
+
 .navbar-logo .logo-icon {
   height: 64px;
   width: auto;
@@ -188,6 +214,63 @@ h3 { font-size: 1.2rem; }
   margin-left: 8px;
 }
 .nav-cta:hover { background: var(--accent-glow) !important; }
+
+.theme-toggle {
+  margin-left: 12px;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  line-height: 0;
+  box-shadow: none;
+  transition: color var(--transition), background var(--transition), transform var(--transition);
+}
+
+.theme-toggle:hover {
+  color: var(--text);
+  background: color-mix(in srgb, var(--text) 8%, transparent);
+}
+
+.theme-toggle:focus-visible {
+  outline: 2px solid var(--accent-glow);
+  outline-offset: 2px;
+}
+
+.theme-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  line-height: 1;
+  color: var(--text-muted);
+  transition: color var(--transition), opacity var(--transition);
+}
+
+.theme-icon-sun {
+  display: none;
+  font-size: 2rem;
+  transform: translateY(-3px);
+}
+
+.theme-icon-moon {
+  display: inline;
+}
+
+.theme-toggle:hover .theme-icon {
+  color: var(--text);
+}
+
+html[data-theme='light'] .theme-icon-sun { display: inline; }
+html[data-theme='light'] .theme-icon-moon { display: none; }
+
+html[data-theme='dark'] .theme-icon-sun { display: none; }
+html[data-theme='dark'] .theme-icon-moon { display: inline; }
 
 /* Hamburger */
 .hamburger {
@@ -444,7 +527,7 @@ h3 { font-size: 1.2rem; }
   height: 10px;
   margin-left: -5px;
   border-radius: 50%;
-  background: rgba(241,245,249,0.8);
+  background: var(--chimney-smoke-color);
   filter: blur(0.5px);
   animation: chimney-smoke 2.8s ease-out infinite;
   pointer-events: none;
@@ -491,10 +574,12 @@ h3 { font-size: 1.2rem; }
 @keyframes dash-flow { to { stroke-dashoffset: -20; } }
 
 .device-node {
+  --node-accent: var(--accent);
   position: absolute;
   width: 52px; height: 52px;
-  background: #1e293b;
-  border: 1.5px solid rgba(59,130,246,0.25);
+  background: var(--bg-surface);
+  color: var(--node-accent);
+  border: 1.5px solid var(--border);
   border-radius: 12px;
   display: flex;
   align-items: center;
@@ -502,14 +587,18 @@ h3 { font-size: 1.2rem; }
   box-shadow: 0 2px 12px rgba(0,0,0,0.08);
   animation: float 4s ease-in-out infinite;
   cursor: default;
-  transition: border-color var(--transition), box-shadow var(--transition);
+  transition: border-color var(--transition), box-shadow var(--transition), background var(--transition);
 }
-.device-node:hover { border-color: var(--accent); box-shadow: 0 4px 20px rgba(59,130,246,0.25); }
+.device-node:hover { border-color: var(--node-accent); box-shadow: 0 4px 20px rgba(59,130,246,0.25); }
 
-.device-node--wifi   { top: 30px;   left: 30px;  animation-delay: 0s; }
-.device-node--light  { top: 30px;   right: 30px; animation-delay: 0.8s; }
-.device-node--thermo { bottom: 70px; left: 10px; animation-delay: 1.6s; }
-.device-node--lock   { bottom: 70px; right: 10px; animation-delay: 2.4s; }
+.device-node svg {
+  stroke: currentColor;
+}
+
+.device-node--wifi   { --node-accent: #3b82f6; top: 30px;   left: 30px;  animation-delay: 0s; }
+.device-node--light  { --node-accent: #f59e0b; top: 30px;   right: 30px; animation-delay: 0.8s; }
+.device-node--thermo { --node-accent: #10b981; bottom: 70px; left: 10px; animation-delay: 1.6s; }
+.device-node--lock   { --node-accent: #8b5cf6; bottom: 70px; right: 10px; animation-delay: 2.4s; }
 
 @keyframes float {
   0%, 100% { transform: translateY(0); }
@@ -522,9 +611,13 @@ h3 { font-size: 1.2rem; }
   transform: translate(-50%,-50%);
   width: 52px; height: 52px;
   border-radius: 12px;
-  border: 1.5px solid var(--accent);
+  border: 1.5px solid currentColor;
   animation: pulse-expand 2.5s ease-out infinite;
   pointer-events: none;
+}
+
+html[data-theme='light'] .device-node {
+  box-shadow: 0 5px 18px rgba(59,130,246,0.12);
 }
 
 @keyframes pulse-expand {
@@ -1123,9 +1216,9 @@ h3 { font-size: 1.2rem; }
 
 .nas-drive {
   width: 52px; height: 14px;
-  background: #1e293b;
+  background: var(--bg-surface);
   border-radius: 3px;
-  border: 1px solid rgba(59,130,246,0.2);
+  border: 1px solid var(--border);
   position: relative;
   animation: nas-access 3s ease-in-out infinite;
 }
@@ -1419,7 +1512,14 @@ h3 { font-size: 1.2rem; }
   margin-bottom: 56px;
 }
 
-.intellikeep-logo-wrap img { height: 320px; }
+.intellikeep-logo-wrap img {
+  height: 320px;
+  filter: drop-shadow(0 8px 24px rgba(2, 6, 23, 0.28));
+}
+
+html[data-theme='light'] .intellikeep-logo-wrap img {
+  filter: invert(1) brightness(0);
+}
 
 .intellikeep-inner {
   display: grid;
@@ -1914,6 +2014,58 @@ h3 { font-size: 1.2rem; }
   background: #fff7ed;
 }
 
+html[data-theme='light'] .nas-box {
+  background: #f8fbff;
+  border-color: rgba(29, 78, 216, 0.2);
+  box-shadow: 0 6px 22px rgba(29, 78, 216, 0.12);
+}
+
+html[data-theme='light'] .nas-drive {
+  background: #eaf1fb;
+  border-color: rgba(29, 78, 216, 0.24);
+}
+
+html[data-theme='light'] .contact-soon {
+  background:
+    radial-gradient(circle at top left, rgba(59,130,246,0.18), transparent 36%),
+    radial-gradient(circle at bottom right, rgba(16,185,129,0.1), transparent 32%),
+    linear-gradient(180deg, #ffffff, #edf4ff);
+  border-color: rgba(29, 78, 216, 0.18);
+  box-shadow: 0 20px 50px rgba(29, 78, 216, 0.14);
+}
+
+html[data-theme='light'] .contact-soon__chips span {
+  border-color: rgba(29, 78, 216, 0.2);
+  background: rgba(255,255,255,0.9);
+}
+
+html[data-theme='light'] .contact-scene__frame {
+  background: linear-gradient(180deg, #f8fbff, #dbe9ff);
+  border-color: rgba(59,130,246,0.2);
+}
+
+html[data-theme='light'] .contact-scene__board,
+html[data-theme='light'] .contact-scene__terminal {
+  background: rgba(255,255,255,0.84);
+  border-color: rgba(29, 78, 216, 0.16);
+}
+
+html[data-theme='light'] .board-line {
+  background: rgba(71,85,105,0.18);
+}
+
+html[data-theme='light'] .contact-scene__floor {
+  background:
+    repeating-linear-gradient(90deg, rgba(59,130,246,0.08) 0 18px, transparent 18px 36px),
+    linear-gradient(180deg, #dbeafe, #bfdbfe);
+}
+
+html[data-theme='light'] .worker__laptop,
+html[data-theme='light'] .worker__tablet {
+  background: linear-gradient(180deg, #f8fafc, #dbeafe);
+  border-color: rgba(59,130,246,0.25);
+}
+
 @keyframes board-pulse {
   0%, 100% { opacity: 0.55; }
   50% { opacity: 1; }
@@ -2102,6 +2254,7 @@ footer {
 
 @media (max-width: 768px) {
   .nav-links { display: none; }
+  .theme-toggle { margin-left: auto; margin-right: 8px; }
   .hamburger { display: flex; }
   .service-card { flex: 1 1 100%; }
   .intellikeep-inner { grid-template-columns: 1fr; gap: 40px; }
