@@ -4,8 +4,23 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="IntelliLar — Automação residencial profissional com Home Assistant, Alexa, Google Home, Apple Home e SmartThings. Transformamos sua casa em um lar inteligente." />
-  <meta name="theme-color" content="#0f172a" />
+  <meta name="theme-color" content="#0f172a" id="theme-color-meta" />
   <title>IntelliLar — Automação Residencial Inteligente</title>
+
+  <script>
+    (function () {
+      var theme = 'dark';
+      try {
+        var stored = localStorage.getItem('intellilar-theme');
+        if (stored === 'light' || stored === 'dark') {
+          theme = stored;
+        } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+          theme = 'light';
+        }
+      } catch (e) {}
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -45,6 +60,11 @@
           <li><a href="#intellikeep">IntelliKeep</a></li>
           <li><a href="#contato" class="btn btn-primary nav-cta">Fale Conosco</a></li>
         </ul>
+
+        <button class="theme-toggle" id="theme-toggle" aria-label="Alternar tema" aria-pressed="false" title="Alternar tema">
+          <span class="theme-icon theme-icon-sun" aria-hidden="true">☀</span>
+          <span class="theme-icon theme-icon-moon" aria-hidden="true">☾</span>
+        </button>
 
         <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
           <span></span><span></span><span></span>
@@ -129,11 +149,11 @@
             <div class="device-node device-node--wifi" title="Wi-Fi / Roteador">
               <div class="pulse-ring"></div>
               <!-- Wi-Fi icon -->
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
                 <path d="M5 12.55a11 11 0 0 1 14.08 0"/>
                 <path d="M1.42 9a16 16 0 0 1 21.16 0"/>
                 <path d="M8.53 16.11a6 6 0 0 1 6.95 0"/>
-                <circle cx="12" cy="20" r="1" fill="#3b82f6"/>
+                <circle cx="12" cy="20" r="1" fill="currentColor"/>
               </svg>
               <span class="node-label">Wi-Fi</span>
             </div>
@@ -141,7 +161,7 @@
             <div class="device-node device-node--light" title="Iluminação inteligente">
               <div class="pulse-ring"></div>
               <!-- Bulb icon -->
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fbbf24" stroke-width="2" stroke-linecap="round">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
                 <line x1="9" y1="18" x2="15" y2="18"/>
                 <line x1="10" y1="22" x2="14" y2="22"/>
                 <path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"/>
@@ -152,7 +172,7 @@
             <div class="device-node device-node--thermo" title="Termostato / Clima">
               <div class="pulse-ring"></div>
               <!-- Thermometer icon -->
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
                 <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"/>
               </svg>
               <span class="node-label">Clima</span>
@@ -161,7 +181,7 @@
             <div class="device-node device-node--lock" title="Fechadura inteligente">
               <div class="pulse-ring"></div>
               <!-- Lock icon -->
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="2" stroke-linecap="round">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
                 <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
                 <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
               </svg>
