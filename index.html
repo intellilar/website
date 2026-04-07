@@ -61,9 +61,29 @@
           <li><a href="#contato" class="btn btn-primary nav-cta">Fale Conosco</a></li>
         </ul>
 
-        <button class="theme-toggle" id="theme-toggle" aria-label="Alternar tema" aria-pressed="false" title="Alternar tema">
-          <span class="theme-icon theme-icon-sun" aria-hidden="true">☀</span>
-          <span class="theme-icon theme-icon-moon" aria-hidden="true">☾</span>
+        <button class="theme-toggle" id="theme-toggle" type="button" role="switch" aria-label="Alternar tema" aria-checked="false" title="Alternar tema">
+          <span class="theme-toggle-track" aria-hidden="true">
+            <span class="theme-toggle-label theme-toggle-label-sun">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="4"></circle>
+                <path d="M12 2.5v2.25"></path>
+                <path d="M12 19.25v2.25"></path>
+                <path d="M4.93 4.93l1.59 1.59"></path>
+                <path d="M17.48 17.48l1.59 1.59"></path>
+                <path d="M2.5 12h2.25"></path>
+                <path d="M19.25 12h2.25"></path>
+                <path d="M4.93 19.07l1.59-1.59"></path>
+                <path d="M17.48 6.52l1.59-1.59"></path>
+              </svg>
+            </span>
+            <span class="theme-toggle-thumb"></span>
+            <span class="theme-toggle-label theme-toggle-label-moon">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M20.14 14.06a8 8 0 0 1-10.2-10.2 1 1 0 0 0-1.27-1.27A10 10 0 1 0 21.41 15.33a1 1 0 0 0-1.27-1.27Z"></path>
+              </svg>
+            </span>
+          </span>
+          <span class="sr-only theme-toggle-text">Tema escuro ativo</span>
         </button>
 
         <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">

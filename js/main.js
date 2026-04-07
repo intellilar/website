@@ -12,6 +12,7 @@ const THEME_META_COLORS = {
 const rootElement = document.documentElement;
 const themeToggle = document.getElementById('theme-toggle');
 const themeColorMeta = document.getElementById('theme-color-meta');
+const themeToggleText = document.querySelector('.theme-toggle-text');
 
 function applyTheme(theme) {
   const normalizedTheme = theme === 'light' ? 'light' : 'dark';
@@ -19,9 +20,14 @@ function applyTheme(theme) {
 
   if (themeToggle) {
     const nextActionLabel = normalizedTheme === 'dark' ? 'Ativar tema claro' : 'Ativar tema escuro';
+    const currentThemeLabel = normalizedTheme === 'dark' ? 'Tema escuro ativo' : 'Tema claro ativo';
     themeToggle.setAttribute('aria-label', nextActionLabel);
     themeToggle.setAttribute('title', nextActionLabel);
-    themeToggle.setAttribute('aria-pressed', normalizedTheme === 'light' ? 'true' : 'false');
+    themeToggle.setAttribute('aria-checked', normalizedTheme === 'light' ? 'true' : 'false');
+
+    if (themeToggleText) {
+      themeToggleText.textContent = currentThemeLabel;
+    }
   }
 
   if (themeColorMeta) {
