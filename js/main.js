@@ -23,7 +23,7 @@ function applyTheme(theme) {
     const currentThemeLabel = normalizedTheme === 'dark' ? 'Tema escuro ativo' : 'Tema claro ativo';
     themeToggle.setAttribute('aria-label', nextActionLabel);
     themeToggle.setAttribute('title', nextActionLabel);
-    themeToggle.setAttribute('aria-checked', normalizedTheme === 'light' ? 'true' : 'false');
+    themeToggle.setAttribute('aria-checked', normalizedTheme === 'dark' ? 'true' : 'false');
 
     if (themeToggleText) {
       themeToggleText.textContent = currentThemeLabel;

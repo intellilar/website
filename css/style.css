@@ -274,7 +274,7 @@ h3 { font-size: 1.2rem; }
 
 .theme-toggle-label {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -289,10 +289,21 @@ h3 { font-size: 1.2rem; }
   height: 16px;
 }
 
+.theme-toggle-label-sun svg {
+  transform: translateX(-0.5px);
+}
+
+.theme-toggle-label-moon svg {
+  width: 17px;
+  height: 17px;
+  transform: translateX(1px) translateY(0.25px);
+}
+
 .theme-toggle-thumb {
   position: absolute;
   top: 5px;
   left: 5px;
+  z-index: 1;
   width: 28px;
   height: 28px;
   border-radius: 50%;
@@ -311,20 +322,27 @@ html[data-theme='light'] .theme-toggle-track {
     linear-gradient(135deg, rgba(59, 130, 246, 0.16), rgba(255, 255, 255, 0.9));
 }
 
-html[data-theme='light'] .theme-toggle-thumb {
+html[data-theme='dark'] .theme-toggle-thumb {
   transform: translateX(32px);
+}
+
+html[data-theme='light'] .theme-toggle-thumb {
+  transform: translateX(0);
   background: linear-gradient(180deg, #ffffff, #dbeafe);
   box-shadow: 0 8px 18px rgba(59, 130, 246, 0.22), inset 0 -2px 4px rgba(147, 197, 253, 0.45);
 }
 
-html[data-theme='light'] .theme-toggle-label-sun,
+html[data-theme='light'] .theme-toggle-label-sun {
+  color: #0f172a;
+}
+
 html[data-theme='dark'] .theme-toggle-label-moon {
-  color: var(--text);
+  color: #0f172a;
 }
 
 html[data-theme='light'] .theme-toggle-label-moon,
 html[data-theme='dark'] .theme-toggle-label-sun {
-  opacity: 0.72;
+  opacity: 0.62;
 }
 
 /* Hamburger */
